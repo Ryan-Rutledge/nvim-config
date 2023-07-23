@@ -26,6 +26,7 @@ Plug('lewis6991/gitsigns.nvim')  -- git visual/movement
 
 -- Misc
 Plug('preservim/nerdcommenter')  -- comment lines shortcuts
+Plug('vim-test/vim-test')
 
 -- LSP Support
 Plug('neovim/nvim-lspconfig')
