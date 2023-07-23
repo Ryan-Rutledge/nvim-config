@@ -2,14 +2,13 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', 'U', '<C-r>', { noremap = true })
 vim.keymap.set('n', 'Y', 'y$', { noremap = true })
-vim.keymap.set('n', '<A-t>', ':lcd %:p:h<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>?', ':nohlsearch<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>L', ':set relativenumber!<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
 
+-- movement
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { noremap = true, silent = true })
-vim.keymap.set({ 't' }, '<A-t>', 'cd expand("#:p:h")<CR>', { noremap = true, silent = true })
 
 -- paste
 vim.keymap.set('x', '<leader>p', '"_dp', { noremap = true, silent = true })
