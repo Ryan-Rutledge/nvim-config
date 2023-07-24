@@ -5,9 +5,9 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- (Optional) Configure lua language server for neovim
-local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.rust_analyzer.setup({})
+-- local lspconfig = require('lspconfig')
+-- lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+-- lspconfig.rust_analyzer.setup({})
 
 lsp.setup()
 

@@ -9,6 +9,10 @@ vim.keymap.set('n', '<leader>cd', ':lcd %:p:h<CR>', { noremap = true, silent = t
 -- movement
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader><leader>' , ':b #<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>n' , ':bn<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>p' , ':bp<CR>', { noremap = true, silent = true })
+
 
 -- paste
 vim.keymap.set('x', '<leader>p', '"_dp', { noremap = true, silent = true })

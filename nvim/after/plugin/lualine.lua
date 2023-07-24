@@ -1,13 +1,3 @@
-
-local simpleFilename = function(filename)
-    local extension_index, _ = string.find(filename, '%.', 2)
-    if extension_index == nil then
-        return filename
-    else
-        return string.sub(filename, 0, extension_index-1)
-    end
-end
-
 require('lualine').setup {
   options = {
     theme = 'tokyonight',
@@ -28,66 +18,93 @@ require('lualine').setup {
     lualine_b = {'selectioncount'},
     lualine_c = {'searchcount'},
     lualine_x = {'%b U+%B'},
-    lualine_y = {'location'},
-    lualine_z = {'progress', '%L'},
+    lualine_y = {'location', '%L'},
+    lualine_z = {'%n'},
   },
 
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {'%L'},
-    lualine_z = {'location'}
-  },
+  -- inactive_sections = {
+  --   lualine_a = {},
+  --   lualine_b = {},
+  --   lualine_c = {},
+  --   lualine_x = {},
+  --   lualine_y = {},
+  --   lualine_z = {}
+  -- },
 
   tabline = {
-    lualine_a = {'branch'},
-    lualine_b = {{
-        'filename',
-        path = 3,
-        file_status = false
+    lualine_a = {{
+        'buffers',
+        mode = 4,
+        show_filename_only = true,
+        hide_filename_extension = true,
+        show_modified_status = true,
+        icons_enabled = false,
+        disabled_buftypes = { 'quickfix', 'prompt', 'help' },
+        use_mode_colors = false,
+        filetype_names = {
+            TelescopePrompt = 'Telescope',
+            dashboard = 'Dashboard',
+            packer = 'Packer',
+            fzf = 'FZF',
+            alpha = 'Alpha'
+        }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
     }},
+    lualine_b = {},
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {{
         'tabs',
-        mode = 1,
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-        fmt = simpleFilename,
+        mode = 0,
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
     }},
   },
 
   winbar = {
-    lualine_a = {{
-        'filename',
-        path = 0,
-        file_status = false,
-    }},
-    lualine_b = {'%R%H%W%M'},
+    lualine_a = {'branch'},
+    lualine_b = {
+        {
+            'filename',
+            path = 3,
+            file_status = false
+        }
+    },
     lualine_c = {{
         'diagnostics',
         symbols = { error = '󰏃 ', warn = '󰔶 ', info = '󰅺 ', hint = ' ' },
     }},
-    lualine_x = {
+    lualine_x = {'encoding', 'fileformat', },
+    lualine_y = { 'filesize', },
+    lualine_z = {
+        {
+            'filetype',
+            colored = false,
+            icon = { align = 'right'},
+        }
     },
-    lualine_y = {'filesize', 'fileformat', 'encoding', },
-    lualine_z = {{
-        'filetype',
-        colored = false,
-        icon = { align = 'right'},
-    }},
   },
 
   inactive_winbar = {
-    lualine_a = {{'filename', path = 0, file_status = false }},
-    lualine_b = {},
+    lualine_a = {
+        'branch',
+        {
+            'filename',
+            path = 3,
+            file_status = false
+        }
+    },
+    lualine_b = {'%R%H%W%M'},
     lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
+    lualine_x = {'encoding', 'fileformat'},
+    lualine_y = {'filesize'},
+    lualine_z = {
+        {
+            'filetype',
+            colored = false,
+            icon = {align = 'right'},
+        },
+    },
   },
 
   extensions = { 'nvim-tree', 'fugitive' }
