@@ -4,6 +4,7 @@ let g:loaded_netrwPlugin = 1
 lua require('plugins')
 lua require('colors')
 lua require('remap')
+lua require('init')
 
 " general support
 au BufRead,BufNewFile bash-fc-* set filetype=sh
@@ -13,7 +14,6 @@ set backupdir=~/.vim/backups
 set directory=~/.vim/swapfiles
 
 set cmdheight=0
-set relativenumber
 set backspace=indent,eol,start
 set lazyredraw
 set linebreak
