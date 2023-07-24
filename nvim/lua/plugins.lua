@@ -38,6 +38,7 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug('VonHeikemen/lsp-zero.nvim', { branch = 'v2.x' })
 Plug('ray-x/lsp_signature.nvim')
+Plug('folke/neodev.nvim') -- vim dev lua support
 
 -- colorschemes
 Plug('folke/tokyonight.nvim', { branch = 'main', as = 'tokyonight' })
