@@ -1,6 +1,6 @@
 vim.opt.termguicolors = true
 
-local nvimtree = require("nvim-tree")
+local nvimtree = require('nvim-tree')
 
 nvimtree.setup({
     disable_netrw = true,
@@ -10,7 +10,37 @@ nvimtree.setup({
         update_root = true
     },
     view = {
+        signcolumn = 'auto',
         side = 'right',
+    },
+    renderer = {
+        highlight_git = true,
+        icons = {
+            git_placement = 'signcolumn',
+            modified_placement = 'signcolumn',
+            symlink_arrow = '  ',
+            glyphs = {
+                git = {
+                    unstaged = '󰜥',
+                    staged = '',
+                    unmerged = '',
+                    renamed = '',
+                    untracked = '󰓎',
+                    deleted = '',
+                    ignored = '󰛑',
+                },
+                folder = {
+                  arrow_closed = '',
+                  arrow_open = '',
+                  default = '',
+                  open = '',
+                  empty = '',
+                  empty_open = '',
+                  symlink = '',
+                  symlink_open = '',
+                }
+            }
+        }
     },
     actions = {
         open_file = {
@@ -30,6 +60,10 @@ nvimtree.setup({
             global = true
         }
     },
+    git = {
+        enable = true,
+        show_on_open_dirs = false
+    }
 })
 
 
