@@ -32,12 +32,13 @@ require('lualine').setup {
   -- },
 
   tabline = {
-    lualine_a = {{
+    lualine_a = {},
+    lualine_b = {{
         'buffers',
         mode = 4,
         show_filename_only = true,
         hide_filename_extension = true,
-        show_modified_status = true,
+        show_modified_status = false,
         icons_enabled = false,
         disabled_buftypes = { 'quickfix', 'prompt', 'help' },
         use_mode_colors = false,
@@ -49,7 +50,6 @@ require('lualine').setup {
             alpha = 'Alpha'
         }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
     }},
-    lualine_b = {},
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
