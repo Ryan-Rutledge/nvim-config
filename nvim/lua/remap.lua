@@ -5,6 +5,7 @@ vim.keymap.set('n', 'Y', 'y$', { noremap = true })
 vim.keymap.set('n', '<leader>?', ':nohlsearch<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>L', ':set relativenumber!<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', { noremap = true })
 
 -- movement
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true, silent = true })
@@ -24,7 +25,8 @@ vim.keymap.set('x', '<leader>S', '"_dS', { noremap = true, silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', { noremap = true, silent = true })
 vim.api.nvim_create_autocmd({"TermOpen"}, {
     callback = function(_)
-        vim.opt.number = true
+        vim.opt.number = false
+        vim.opt.relativenumber = false
         vim.opt.modifiable = true
     end
 })

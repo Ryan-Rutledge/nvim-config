@@ -68,9 +68,11 @@ require('lualine').setup {
             'filename',
             path = 3,
             file_status = false
-        }
+        },
+        '%R%H%W%M',
     },
-    lualine_c = {{
+    lualine_c = {
+        {
         'diagnostics',
         symbols = { error = '󰏃 ', warn = '󰔶 ', info = '󰅺 ', hint = ' ' },
     }},

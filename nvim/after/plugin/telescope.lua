@@ -1,9 +1,7 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
-local utils = require('telescope.utils')
 local action = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
-local action_state = require('telescope.actions.state')
 
 telescope.setup({
     theme = 'tokyonight',
