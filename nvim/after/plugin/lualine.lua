@@ -1,3 +1,9 @@
+
+local function current_macro()
+    local register = vim.fn.reg_recording()
+    return register == '' and '' or ('@' .. register)
+end
+
 require('lualine').setup {
   options = {
     theme = 'tokyonight',
@@ -14,7 +20,7 @@ require('lualine').setup {
 
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'selectioncount'},
+    lualine_b = {'selectioncount', current_macro },
     lualine_c = {'searchcount'},
     lualine_x = {'%b U+%B'},
     lualine_y = {'location', '%L'},
