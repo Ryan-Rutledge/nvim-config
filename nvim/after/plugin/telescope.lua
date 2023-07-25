@@ -86,7 +86,7 @@ vim.keymap.set('n', 'z=', builtin.spell_suggest)
 vim.keymap.set('n', '<leader>/M', builtin.man_pages, {})
 
 -- git
-vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+vim.keymap.set('n', '<C-p>', function() builtin.git_files({ show_untracked = true }) end, {})
 vim.keymap.set('n', '<leader>/g', builtin.git_bcommits, {})
 vim.keymap.set('v', '<leader>/g', builtin.git_bcommits_range, {})
 vim.keymap.set('n', '<leader>/c', builtin.git_commits, {})
