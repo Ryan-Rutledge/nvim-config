@@ -70,7 +70,7 @@ vim.keymap.set('n', '<leader>/d', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>/D', function() builtin.diagnostics({ bufnr = nil }) end, {})
 
 -- vim
-vim.keymap.set('n', '<leader>`', builtin.buffers, {})
+vim.keymap.set('n', '<leader><Tab>', builtin.buffers, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 vim.keymap.set('n', '<leader>/?', builtin.search_history, {})
 vim.keymap.set('n', '<leader>r', builtin.registers, {})

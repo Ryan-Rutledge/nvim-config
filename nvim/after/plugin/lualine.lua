@@ -38,29 +38,13 @@ require('lualine').setup {
 
   tabline = {
     lualine_a = {},
-    lualine_b = {{
-        'buffers',
-        mode = 4,
-        show_filename_only = true,
-        hide_filename_extension = true,
-        show_modified_status = false,
-        icons_enabled = false,
-        disabled_buftypes = { 'quickfix', 'prompt', 'help' },
-        use_mode_colors = false,
-        filetype_names = {
-            TelescopePrompt = 'Telescope',
-            dashboard = 'Dashboard',
-            packer = 'Packer',
-            fzf = 'FZF',
-            alpha = 'Alpha'
-        }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
-    }},
+    lualine_b = {},
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {{
         'tabs',
-        mode = 0,
+        mode = 1,
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
     }},
@@ -116,3 +100,6 @@ require('lualine').setup {
 
   extensions = { 'nvim-tree', 'fugitive' }
 }
+
+vim.opt.showtabline = 1
+

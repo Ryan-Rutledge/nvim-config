@@ -11,7 +11,8 @@ vim.keymap.set('n', '<leader>q', ':helpclose<CR>', { noremap = true, silent = tr
 -- movement
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader><leader>' , ':b #<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>b' , ':bp|bd #<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>`' , ':b #<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>n' , ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>p' , ':bp<CR>', { noremap = true, silent = true })
 
