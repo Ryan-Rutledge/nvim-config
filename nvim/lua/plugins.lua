@@ -10,11 +10,11 @@ Plug('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })  -- parsing libra
 Plug('nvim-telescope/telescope.nvim')  -- fuzzy search
 Plug('ThePrimeagen/harpoon')  -- quick file switching
 Plug('mbbill/undotree')  -- undo visualizer
-Plug('preservim/tagbar')  -- object explorer
 
 -- View
 Plug('nvim-tree/nvim-web-devicons')  -- icons
 Plug('nvim-tree/nvim-tree.lua')  -- file explorer
+Plug('simrat39/symbols-outline.nvim') -- object explorer
 Plug('nvim-treesitter/nvim-treesitter-context')  -- sticky headers
 Plug('lukas-reineke/indent-blankline.nvim')  -- context highlighter
 Plug('nvim-lualine/lualine.nvim')  -- statusline/windowline/tabline customization
