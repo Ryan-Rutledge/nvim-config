@@ -1,4 +1,14 @@
 
+local simpleFilename = function(filename)
+    local extension_index, _ = string.find(filename, '%.', 2)
+    
+    if extension_index == nil then
+        return filename
+    else
+        return string.sub(filename, 0, extension_index-1)
+    end
+end
+
 local function current_macro()
     local register = vim.fn.reg_recording()
     return register == '' and '' or ('@' .. register)
@@ -11,7 +21,7 @@ require('lualine').setup {
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
-      winbar = {'NvimTree', 'tagbar', 'Outline', 'fugitive', '', },
+      winbar = {'NvimTree', 'tagbar', 'Outline', 'fugitive', 'toggleterm', '', },
       tabline = {'NvimTree', 'tagbar', 'Outline'},
     },
     ignore_focus = {'NvimTree', 'tagbar'},
@@ -37,29 +47,37 @@ require('lualine').setup {
   -- },
 
   tabline = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {{
-        'tabs',
-        mode = 1,
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-    }},
-  },
-
-  winbar = {
-    lualine_a = {'branch'},
+    lualine_a = {
+        'branch'
+    },
     lualine_b = {
         {
             'filename',
             path = 3,
             file_status = false
         },
-        '%R%H%W%M',
     },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {{
+        'tabs',
+        mode = 1,
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+    }},
+  },
+
+  winbar = {
+    lualine_a = {
+        {
+            'filename',
+            path = 0,
+            fmt = simpleFilename,
+            file_status = false
+        },
+    },
+    lualine_b = { '%Y%R%W%M', },
     lualine_c = {
         {
         'diagnostics',
@@ -78,14 +96,14 @@ require('lualine').setup {
 
   inactive_winbar = {
     lualine_a = {
-        'branch',
         {
             'filename',
-            path = 3,
+            path = 0,
+            fmt = simpleFilename,
             file_status = false
-        }
+        },
     },
-    lualine_b = {'%R%H%W%M'},
+    lualine_b = { '%Y%R%W%M', },
     lualine_c = {},
     lualine_x = {'encoding', 'fileformat'},
     lualine_y = {'filesize'},
@@ -100,6 +118,4 @@ require('lualine').setup {
 
   extensions = { 'nvim-tree', 'fugitive' }
 }
-
-vim.opt.showtabline = 1
 

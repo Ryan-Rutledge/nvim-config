@@ -5,7 +5,7 @@ require('tokyonight').setup({
         keywords = { italic = false },
         sidebars = 'dark'
     },
-    sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'tagbar', 'Outline' },
+    sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'tagbar', 'Outline', 'termtoggle' },
     on_colors = function(colors)
         colors.bg = '#10111a'
         colors.bg_highlight = '#090a15'

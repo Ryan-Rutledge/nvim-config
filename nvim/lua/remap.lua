@@ -25,11 +25,4 @@ vim.keymap.set('x', '<leader>S', '"_dS', { noremap = true, silent = true })
 
 -- terminal
 vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', { noremap = true, silent = true })
-vim.api.nvim_create_autocmd({'TermOpen'}, {
-    callback = function(_)
-        vim.opt.number = false
-        vim.opt.relativenumber = false
-        vim.opt.modifiable = true
-    end
-})
 

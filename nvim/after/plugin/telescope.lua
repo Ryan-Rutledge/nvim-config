@@ -57,11 +57,11 @@ vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
 
 -- files
 vim.keymap.set('n', '<leader>//', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>F', builtin.find_files, {})
-vim.keymap.set('n', '<leader>/f', builtin.current_buffer_fuzzy_find, {})
+vim.keymap.set('n', '<leader>f', builtin.find_files, {})
+vim.keymap.set('n', '<leader>/%', builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set('n', '<leader>/b', function() builtin.live_grep({ grep_open_files = true }) end, {})
 vim.keymap.set('n', '<leader>/*', builtin.grep_string, {})
-vim.keymap.set('n', '<leader>/o', builtin.treesitter, {})
+vim.keymap.set('n', '<leader>/T', builtin.treesitter, {})
 vim.keymap.set('n', '<leader>/s', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>/S', builtin.lsp_workspace_symbols, {})
 vim.keymap.set('n', '<leader>/r', builtin.lsp_references, {})
@@ -89,6 +89,6 @@ vim.keymap.set('n', '<leader>/M', builtin.man_pages, {})
 vim.keymap.set('n', '<C-p>', function() builtin.git_files({ show_untracked = true }) end, {})
 vim.keymap.set('n', '<leader>/g', builtin.git_bcommits, {})
 vim.keymap.set('v', '<leader>/g', builtin.git_bcommits_range, {})
-vim.keymap.set('n', '<leader>/c', builtin.git_commits, {})
-vim.keymap.set('n', '<leader>/C', builtin.git_branches, {})
+vim.keymap.set('n', '<leader>/G', builtin.git_commits, {})
+vim.keymap.set('n', '<leader>/B', builtin.git_branches, {})
 

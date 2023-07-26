@@ -67,4 +67,4 @@ nvimtree.setup({
 })
 
 
-vim.keymap.set('n', '<leader>f', ':NvimTreeFindFileToggle<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>F', ':NvimTreeFindFileToggle<CR>', { silent = true, noremap = true })

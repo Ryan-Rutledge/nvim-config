@@ -5,6 +5,8 @@ vim.call('plug#begin')
 -- Libraries
 Plug('nvim-lua/plenary.nvim')  -- common library
 Plug('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })  -- parsing library
+-- Plug('nvim-treesitter/playground', { run = ':TSUpdate' })
+
 
 -- Navigation
 Plug('nvim-telescope/telescope.nvim')  -- fuzzy search
@@ -25,6 +27,7 @@ Plug('lewis6991/gitsigns.nvim')  -- git visual/movement
 
 -- Misc
 Plug('preservim/nerdcommenter')  -- comment lines shortcuts
+Plug('akinsho/toggleterm.nvim')
 Plug('vim-test/vim-test')
 
 -- LSP Support
