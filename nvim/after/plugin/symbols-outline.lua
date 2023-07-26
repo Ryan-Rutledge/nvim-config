@@ -34,5 +34,5 @@ symbols_outline.setup({
     }
 })
 
-vim.keymap.set('n', '<leader>O', ':SymbolsOutline<CR>', { remap = false, silent = true })
+vim.keymap.set('n', '<leader>O', ':SymbolsOutline<CR>', { noremap = true, silent = true })
 
