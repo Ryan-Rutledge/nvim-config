@@ -14,7 +14,7 @@ require('tokyonight').setup({
     on_highlights = function(highlights, colors)
         highlights.CursorLineNr = { fg = colors.magenta, bg = colors.bg_highlight }
         highlights.CursorLineSign = { bg = colors.bg_highlight }
-        highlights.Visual = {bg = '#554670'}
+        highlights.Visual = { bg = '#554670' }
     end,
     lualine_bold = true,
 })

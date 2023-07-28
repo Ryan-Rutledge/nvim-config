@@ -8,7 +8,7 @@ require('remap')
 
 -- general support
 vim.opt.cmdheight = 0
-vim.opt.lazyredraw = true
+-- vim.opt.lazyredraw = true
 vim.opt.linebreak = true
 vim.opt.showmatch = false
 vim.opt.wrap = false

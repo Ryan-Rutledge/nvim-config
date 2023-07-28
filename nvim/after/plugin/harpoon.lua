@@ -17,11 +17,3 @@ vim.keymap.set('n', '<leader>7', function() ui.nav_file(7) end, { silent = true,
 vim.keymap.set('n', '<leader>8', function() ui.nav_file(8) end, { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>9', function() ui.nav_file(9) end, { silent = true, noremap = true })
 
-vim.keymap.set('n', '<leader>\\', function() term.gotoTerminal(0) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<A-t>',
-    function()
-        term.sendCommand(0, 'cd ' .. vim.fn.expand('%:p:h') .. '\n')
-        term.gotoTerminal(0)
-    end,
-    { silent = true, noremap = true }
-)

@@ -56,6 +56,7 @@ vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
 -- Standard keymap overrides
 vim.keymap.set('n', 'gi', builtin.lsp_implementations, { noremap = true, silent = true})
 vim.keymap.set('n', 'gr', builtin.lsp_references, {})
+vim.keymap.set('n', 'z=', builtin.spell_suggest)
 
 -- files
 vim.keymap.set('n', '<leader>f', builtin.find_files, {})
@@ -65,9 +66,9 @@ vim.keymap.set('n', '\\*', builtin.grep_string, {})
 -- file contents
 vim.keymap.set('n', '\\\\', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>\\\\', function() builtin.live_grep({ grep_open_files = true }) end, {})
-vim.keymap.set('n', '<leader>/t', builtin.treesitter, {})
-vim.keymap.set('n', '<leader>/d', builtin.diagnostics, {})
-vim.keymap.set('n', '<leader>/D', function() builtin.diagnostics({ bufnr = nil }) end, {})
+vim.keymap.set('n', '\\t', builtin.treesitter, {})
+vim.keymap.set('n', '\\d', builtin.diagnostics, {})
+vim.keymap.set('n', '\\D', function() builtin.diagnostics({ root_dir = true }) end, {})
 
 -- Symbols
 vim.keymap.set('n', '\\a', builtin.lsp_document_symbols, {})
@@ -93,7 +94,6 @@ vim.keymap.set('n', '<leader>\\m', builtin.marks, {})
 vim.keymap.set('n', '<leader>\\h', builtin.highlights, {})
 vim.keymap.set('n', '<leader>\\q', builtin.quickfix, {})
 vim.keymap.set('n', '<leader>\\k', builtin.keymaps, {})
-vim.keymap.set('n', 'z=', builtin.spell_suggest)
 
 -- terminal
 vim.keymap.set('n', '\\T', builtin.man_pages, {})
@@ -104,4 +104,7 @@ vim.keymap.set('n', '\\g', builtin.git_bcommits, {})
 vim.keymap.set('v', '\\g', builtin.git_bcommits_range, {})
 vim.keymap.set('n', '\\G', builtin.git_commits, {})
 vim.keymap.set('n', '\\B', builtin.git_branches, {})
+
+-- extensiosn
+vim.keymap.set('n', '\\n', telescope.extensions.notify.notify, {noremap = true, silent = true})
 

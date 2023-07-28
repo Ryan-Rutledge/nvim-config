@@ -1,11 +1,11 @@
 vim.g.mapleader = ' '
 
-vim.keymap.set('n', 'U', '<C-r>', { noremap = true })
-vim.keymap.set('n', 'Y', 'y$', { noremap = true })
-vim.keymap.set('n', '<leader>?', ':nohlsearch<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'U', '<C-r>', { noremap = true, silent = true })
+vim.keymap.set('n', 'Y', 'y$', { noremap = true, silent = true })
+vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { silent = true })
 vim.keymap.set('n', '<leader>L', ':set relativenumber!<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>q', ':helpclose<CR>', { noremap = true, silent = true })
 
 -- movement

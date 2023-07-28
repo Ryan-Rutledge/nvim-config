@@ -7,17 +7,8 @@ end)
 -- (Optional) Configure lua language server for neovim
 local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.rust_analyzer.setup({})
 
 lsp.setup()
-
-local lsp_signature = require("lsp_signature")
-lsp_signature.setup({
-    bind = true,
-    handler_opts = {
-        border = "rounded"
-    },
-})
 
 local cmp = require('cmp')
 local cmp_action = lsp.cmp_action()

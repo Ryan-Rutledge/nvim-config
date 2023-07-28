@@ -17,9 +17,12 @@ Plug('mbbill/undotree')  -- undo visualizer
 Plug('nvim-tree/nvim-web-devicons')  -- icons
 Plug('nvim-tree/nvim-tree.lua')  -- file explorer
 Plug('simrat39/symbols-outline.nvim') -- object explorer
-Plug('nvim-treesitter/nvim-treesitter-context')  -- sticky headers
+-- Plug('nvim-treesitter/nvim-treesitter-context')  -- sticky headers
 Plug('lukas-reineke/indent-blankline.nvim')  -- context highlighter
 Plug('nvim-lualine/lualine.nvim')  -- statusline/windowline/tabline customization
+Plug('MunifTanjim/nui.nvim')  -- ui components
+Plug('rcarriga/nvim-notify')  -- pretty notifications
+Plug('folke/noice.nvim') -- pretty input bar
 
 -- Git
 Plug('tpope/vim-fugitive')  -- git tooling
