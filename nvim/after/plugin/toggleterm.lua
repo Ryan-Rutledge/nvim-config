@@ -7,7 +7,8 @@ require('toggleterm').setup({
         }
     },
     float_opts = {
-        border ='curved'
+        border ='curved',
+        winblend = 15,
     },
     autochdir = true,
     shade_terminals = false,
