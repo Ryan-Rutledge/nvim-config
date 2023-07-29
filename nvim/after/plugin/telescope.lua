@@ -94,6 +94,7 @@ vim.keymap.set('n', '<leader>\\m', builtin.marks, {})
 vim.keymap.set('n', '<leader>\\h', builtin.highlights, {})
 vim.keymap.set('n', '<leader>\\q', builtin.quickfix, {})
 vim.keymap.set('n', '<leader>\\k', builtin.keymaps, {})
+vim.keymap.set('n', '<leader>\\n', telescope.extensions.notify.notify, {noremap = true, silent = true})
 
 -- terminal
 vim.keymap.set('n', '\\T', builtin.man_pages, {})
@@ -104,7 +105,4 @@ vim.keymap.set('n', '\\g', builtin.git_bcommits, {})
 vim.keymap.set('v', '\\g', builtin.git_bcommits_range, {})
 vim.keymap.set('n', '\\G', builtin.git_commits, {})
 vim.keymap.set('n', '\\B', builtin.git_branches, {})
-
--- extensiosn
-vim.keymap.set('n', '\\n', telescope.extensions.notify.notify, {noremap = true, silent = true})
 

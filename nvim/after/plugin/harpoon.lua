@@ -1,19 +1,21 @@
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
-local term = require('harpoon.term')
+local notify = require('notify')
 
-vim.keymap.set('n', '<leader>m', mark.add_file, { silent = true })
-vim.keymap.set('n', '<leader>M', ui.toggle_quick_menu, { silent = true })
+vim.keymap.set('n', '<C-h>', ui.nav_prev, { silent = true, noremap = true })
+vim.keymap.set('n', '<C-l>', ui.nav_next, { silent = true, noremap = true })
+vim.keymap.set('n', '<leader><CR>', ui.toggle_quick_menu, { noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>N', function() ui.nav_next() end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>P', function() ui.nav_prev() end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>1', function() ui.nav_file(1) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>2', function() ui.nav_file(2) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>3', function() ui.nav_file(3) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>4', function() ui.nav_file(4) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>5', function() ui.nav_file(5) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>6', function() ui.nav_file(6) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>7', function() ui.nav_file(7) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>8', function() ui.nav_file(8) end, { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>9', function() ui.nav_file(9) end, { silent = true, noremap = true })
-
+vim.keymap.set(
+    'n',
+    '<CR>',
+    function()
+        if (vim.v.count == 0) then
+            mark.add_file()
+            notify('File marked')
+        else
+            ui.nav_file(vim.v.count)
+        end
+    end,
+    { noremap = true, silent = true }
+)
