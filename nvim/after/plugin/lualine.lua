@@ -62,7 +62,7 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {{
         'tabs',
-        mode = 1,
+        mode = 0,
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
     }},

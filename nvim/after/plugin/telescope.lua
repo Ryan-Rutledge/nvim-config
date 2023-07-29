@@ -51,6 +51,8 @@ telescope.setup({
     },
 })
 
+telescope.load_extension('noice')
+
 vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
 
 -- Standard keymap overrides
@@ -94,7 +96,7 @@ vim.keymap.set('n', '<leader>\\m', builtin.marks, {})
 vim.keymap.set('n', '<leader>\\h', builtin.highlights, {})
 vim.keymap.set('n', '<leader>\\q', builtin.quickfix, {})
 vim.keymap.set('n', '<leader>\\k', builtin.keymaps, {})
-vim.keymap.set('n', '<leader>\\n', telescope.extensions.notify.notify, {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>\\n', ':NoiceTelescope<CR>', {noremap = true, silent = true})
 
 -- terminal
 vim.keymap.set('n', '\\T', builtin.man_pages, {})
