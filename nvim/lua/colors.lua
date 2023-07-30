@@ -1,4 +1,5 @@
 require('tokyonight').setup({
+    style = 'night',
     styles = {
         comments = { fg = '#F0318D', italic = false },
         functions = { italic = false },
@@ -6,17 +7,13 @@ require('tokyonight').setup({
         sidebars = 'dark'
     },
     sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'tagbar', 'Outline', 'termtoggle' },
+    lualine_bold = true,
     on_colors = function(colors)
-        colors.bg = '#10111a'
-        colors.bg_highlight = '#090a15'
-        colors.bg_sidebar = '#07000a'
     end,
     on_highlights = function(highlights, colors)
         highlights.CursorLineNr = { fg = colors.magenta, bg = colors.bg_highlight }
-        highlights.CursorLineSign = { bg = colors.bg_highlight }
-        highlights.Visual = { bg = '#554670' }
+        highlights.IncSearch = { fg = '#000000', bg = colors.magenta }
     end,
-    lualine_bold = true,
 })
 
 vim.cmd[[colorscheme tokyonight]]

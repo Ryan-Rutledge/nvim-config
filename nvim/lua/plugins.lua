@@ -7,7 +7,6 @@ Plug('nvim-lua/plenary.nvim')  -- common library
 Plug('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })  -- parsing library
 -- Plug('nvim-treesitter/playground', { run = ':TSUpdate' })
 
-
 -- Navigation
 Plug('nvim-telescope/telescope.nvim')  -- fuzzy search
 Plug('ThePrimeagen/harpoon')  -- quick file switching

@@ -1,9 +1,9 @@
-require("noice").setup({
+require('noice').setup({
     lsp = {
         override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
+            ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+            ['vim.lsp.util.stylize_markdown'] = true,
+            ['cmp.entry.get_documentation'] = true,
         },
         hover = {
             silent = false
@@ -11,8 +11,7 @@ require("noice").setup({
     },
     messages = {
         view = 'mini',
-        view_error = "notify",
-        view_warn = "notify",
+        view_error = 'notify',
         view_search = false
     },
     presets = {

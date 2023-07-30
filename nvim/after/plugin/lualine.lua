@@ -48,7 +48,6 @@ require('lualine').setup {
         {
             'filename',
             path = 3,
-            fmt = fancySlash,
             file_status = false,
             use_mode_colors = false,
         },

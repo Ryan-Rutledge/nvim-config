@@ -5,10 +5,9 @@ local nvimtree = require('nvim-tree')
 nvimtree.setup({
     disable_netrw = true,
     respect_buf_cwd = true,
-    update_focused_file = {
-        enable = true,
-        update_root = true
-    },
+    hijack_unnamed_buffer_when_opening = true,
+    hijack_cursor = true,
+    sync_root_with_cwd= true,
     view = {
         signcolumn = 'auto',
         side = 'right',
@@ -67,4 +66,4 @@ nvimtree.setup({
 })
 
 
-vim.keymap.set('n', '<leader>F', ':NvimTreeFindFileToggle<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>F', ':NvimTreeFindFileToggle!<CR>', { silent = true, noremap = true })

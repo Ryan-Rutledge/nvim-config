@@ -1,6 +1,5 @@
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
-local notify = require('notify')
 
 vim.keymap.set('n', '<C-j>', ui.nav_prev, { silent = true, noremap = true })
 vim.keymap.set('n', '<C-k>', ui.nav_next, { silent = true, noremap = true })
@@ -11,8 +10,7 @@ vim.keymap.set(
     '<CR>',
     function()
         if (vim.v.count == 0) then
-            mark.add_file()
-            notify('File marked')
+            mark.toggle_file()
         else
             ui.nav_file(vim.v.count)
         end

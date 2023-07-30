@@ -5,7 +5,6 @@ require('plugins')
 require('colors')
 require('remap')
 
-
 -- general support
 vim.opt.cmdheight = 0
 -- vim.opt.lazyredraw = true
