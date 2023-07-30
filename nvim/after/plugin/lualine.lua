@@ -1,12 +1,6 @@
 
-local simpleFilename = function(filename)
-    local extension_index, _ = string.find(filename, '%.', 2)
-    
-    if extension_index == nil then
-        return filename
-    else
-        return string.sub(filename, 0, extension_index-1)
-    end
+local fancySlash = function(filename)
+    return filename:gsub('/', '  ')
 end
 
 local function current_macro()
@@ -54,7 +48,9 @@ require('lualine').setup {
         {
             'filename',
             path = 3,
-            file_status = false
+            fmt = fancySlash,
+            file_status = false,
+            use_mode_colors = false,
         },
     },
     lualine_c = {},
@@ -72,12 +68,12 @@ require('lualine').setup {
     lualine_a = {
         {
             'filename',
-            path = 0,
-            fmt = simpleFilename,
+            path = 4,
+            fmt = fancySlash,
             file_status = false
         },
     },
-    lualine_b = { '%Y%R%W%M', },
+    lualine_b = { '%R%M', },
     lualine_c = {
         {
         'diagnostics',
@@ -98,14 +94,14 @@ require('lualine').setup {
     lualine_a = {
         {
             'filename',
-            path = 0,
-            fmt = simpleFilename,
+            path = 4,
+            fmt = fancySlash,
             file_status = false
         },
     },
-    lualine_b = { '%Y%R%W%M', },
+    lualine_b = { '%R%M', },
     lualine_c = {},
-    lualine_x = {'encoding', 'fileformat'},
+    lualine_x = {'fileformat', 'encoding' },
     lualine_y = {'filesize'},
     lualine_z = {
         {
@@ -115,7 +111,5 @@ require('lualine').setup {
         },
     },
   },
-
-  extensions = { 'nvim-tree', 'fugitive' }
 }
 
