@@ -13,8 +13,8 @@ vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true, silent = true
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>b' , ':bp|bd #<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>`' , ':b #<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-j>' , ':bp<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-k>' , ':bn<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-h>' , ':bp<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-l>' , ':bn<CR>', { noremap = true, silent = true })
 
 -- paste
 vim.keymap.set('x', '<leader>p', '"_dp', { noremap = true, silent = true })
