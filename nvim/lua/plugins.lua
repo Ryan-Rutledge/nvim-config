@@ -9,6 +9,7 @@ Plug('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })  -- parsing libra
 
 -- Navigation
 Plug('nvim-telescope/telescope.nvim')  -- fuzzy search
+Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('ThePrimeagen/harpoon')  -- quick file switching
 Plug('mbbill/undotree')  -- undo visualizer
 

@@ -51,6 +51,7 @@ telescope.setup({
     },
 })
 
+telescope.load_extension('fzf')
 telescope.load_extension('noice')
 
 vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
