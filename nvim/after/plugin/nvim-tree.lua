@@ -10,7 +10,7 @@ nvimtree.setup({
     sync_root_with_cwd= true,
     view = {
         signcolumn = 'auto',
-        side = 'right',
+        side = 'left',
     },
     renderer = {
         highlight_git = true,

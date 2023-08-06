@@ -105,6 +105,7 @@ vim.keymap.set('n', '\\m', function() builtin.lsp_document_symbols({symbols = 'm
 vim.keymap.set('n', '\\M', function() builtin.lsp_workspace_symbols({symbols = 'module'}) end, opts)
 
 -- vim
+vim.keymap.set('n', '\\q', builtin.quickfix, opts)
 vim.keymap.set('n', '<leader><Tab>', builtin.buffers, opts)
 vim.keymap.set('n', '<leader>\\?', builtin.search_history, opts)
 vim.keymap.set('n', '<leader>\\r', builtin.registers, opts)
@@ -112,7 +113,6 @@ vim.keymap.set('n', '<leader>\\:', builtin.command_history, opts)
 vim.keymap.set('n', '<leader>\\<F1>', builtin.help_tags, opts)
 vim.keymap.set('n', '<leader>\\m', builtin.marks, opts)
 vim.keymap.set('n', '<leader>\\h', builtin.highlights, opts)
-vim.keymap.set('n', '<leader>\\q', builtin.quickfix, opts)
 vim.keymap.set('n', '<leader>\\k', builtin.keymaps, opts)
 vim.keymap.set('n', '<leader>\\n', ':NoiceTelescope<CR>', {noremap = true, silent = true})
 

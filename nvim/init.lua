@@ -7,7 +7,6 @@ require('remap')
 
 -- general support
 vim.opt.cmdheight = 0
--- vim.opt.lazyredraw = true
 vim.opt.linebreak = true
 vim.opt.showmatch = false
 vim.opt.wrap = false
@@ -35,7 +34,7 @@ vim.opt.foldtext = ''
 vim.opt.foldenable = false
 vim.opt.mps:append({'<:>'})
 
-vim.opt.guifont="FiraCode Nerd Font"
+vim.opt.guifont='FiraCode Nerd Font'
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
@@ -43,7 +42,7 @@ vim.opt.cursorcolumn = true
 -- flash yanked text
 vim.api.nvim_create_autocmd({'TextYankPost'}, {
     callback = function(_)
-        vim.highlight.on_yank({higroup="IncSearch", timeout=120})
+        vim.highlight.on_yank({higroup='IncSearch', timeout=120})
     end
 })
 
