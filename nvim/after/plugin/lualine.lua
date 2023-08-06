@@ -1,4 +1,3 @@
-
 local fancySlash = function(filename)
     return filename:gsub('/', '  ')
 end
@@ -12,8 +11,8 @@ require('lualine').setup {
   options = {
     theme = 'tokyonight',
     -- SYMBOL REFERENCE: - 
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
     disabled_filetypes = {
       winbar = {'NvimTree', 'tagbar', 'Outline', 'fugitive', 'toggleterm', '', },
       tabline = {'NvimTree', 'tagbar', 'Outline'},
@@ -24,11 +23,15 @@ require('lualine').setup {
 
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'selectioncount', current_macro },
-    lualine_c = {'searchcount'},
-    lualine_x = {'%b U+%B'},
-    lualine_y = {'location', '%L'},
-    lualine_z = {'%n'},
+    lualine_b = {current_macro, 'selectioncount'},
+    lualine_c = {
+    },
+    lualine_x = {'%b U+%B', 'searchcount'},
+    lualine_y = {'location'},
+    lualine_z = {
+        'encoding',
+        'fileformat',
+    },
   },
 
   -- inactive_sections = {
@@ -41,74 +44,56 @@ require('lualine').setup {
   -- },
 
   tabline = {
-    lualine_a = {
-        'branch'
-    },
-    lualine_b = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {
         {
             'filename',
             path = 3,
             file_status = false,
-            use_mode_colors = false,
-        },
+        }
     },
-    lualine_c = {},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {{
         'tabs',
-        mode = 0,
+        mode = 1,
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
     }},
   },
 
   winbar = {
-    lualine_a = {
-        {
-            'filename',
-            path = 4,
-            fmt = fancySlash,
-            file_status = false
-        },
-    },
-    lualine_b = { '%R%M', },
-    lualine_c = {
-        {
+    lualine_a = {'branch'},
+    lualine_b = {{
+        'filename',
+        path = 1,
+        fmt = fancySlash,
+    }},
+    lualine_c = {{
         'diagnostics',
         symbols = { error = '󰏃 ', warn = '󰔶 ', info = '󰅺 ', hint = ' ' },
     }},
-    lualine_x = {'encoding', 'fileformat', },
-    lualine_y = { 'filesize', },
-    lualine_z = {
-        {
-            'filetype',
-            colored = false,
-            icon = { align = 'right'},
-        }
-    },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
   },
 
   inactive_winbar = {
     lualine_a = {
+        'branch',
         {
             'filename',
-            path = 4,
+            path = 1,
             fmt = fancySlash,
-            file_status = false
-        },
+        }
     },
-    lualine_b = { '%R%M', },
+    lualine_b = {},
     lualine_c = {},
-    lualine_x = {'fileformat', 'encoding' },
-    lualine_y = {'filesize'},
-    lualine_z = {
-        {
-            'filetype',
-            colored = false,
-            icon = {align = 'right'},
-        },
-    },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
   },
 }
 
+vim.opt.showtabline = 1

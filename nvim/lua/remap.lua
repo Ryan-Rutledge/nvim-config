@@ -1,5 +1,5 @@
 vim.g.mapleader = ' '
-local mopts = {}
+local mopts = { silent = true, noremap = true }
 
 vim.keymap.set('n', 'U', '<C-r>', mopts)
 vim.keymap.set('n', 'Y', 'y$', mopts)
@@ -29,6 +29,8 @@ vim.keymap.set('n', '<leader>1', '1gt', mopts)
 vim.keymap.set('n', '<leader>2', '2gt', mopts)
 vim.keymap.set('n', '<leader>3', '3gt', mopts)
 vim.keymap.set('n', '<leader>4', '4gt', mopts)
+vim.keymap.set('n', '<C-h>' , 'gT', mopts)
+vim.keymap.set('n', '<C-l>' , 'gt', mopts)
 
 -- terminal
 vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', mopts)

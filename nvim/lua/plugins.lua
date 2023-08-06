@@ -20,7 +20,6 @@ Plug('simrat39/symbols-outline.nvim') -- object explorer
 Plug('lukas-reineke/indent-blankline.nvim')  -- context highlighter
 Plug('nvim-lualine/lualine.nvim')  -- statusline/windowline/tabline customization
 Plug('MunifTanjim/nui.nvim')  -- ui components
-Plug('rcarriga/nvim-notify')  -- pretty notifications
 Plug('folke/noice.nvim') -- pretty input bar
 
 -- Git
