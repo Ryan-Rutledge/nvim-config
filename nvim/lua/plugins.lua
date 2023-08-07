@@ -13,7 +13,7 @@ Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('mbbill/undotree')  -- undo visualizer
 
 -- View
-Plug('nvim-tree/nvim-web-devicons')  -- icons
+-- Plug('nvim-tree/nvim-web-devicons')  -- icons
 Plug('nvim-tree/nvim-tree.lua')  -- file explorer
 -- Plug('nvim-treesitter/nvim-treesitter-context')  -- sticky headers
 Plug('lukas-reineke/indent-blankline.nvim')  -- context highlighter
@@ -41,7 +41,7 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug('VonHeikemen/lsp-zero.nvim', { branch = 'v2.x' })
 Plug('ray-x/lsp_signature.nvim')
-Plug('folke/neodev.nvim') -- vim dev lua support
+-- Plug('folke/neodev.nvim') -- vim dev lua support
 
 -- colorschemes
 Plug('folke/tokyonight.nvim', { branch = 'main', as = 'tokyonight' })
