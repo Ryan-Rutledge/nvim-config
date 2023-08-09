@@ -23,14 +23,19 @@ require('lualine').setup {
 
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {current_macro, 'selectioncount'},
+    lualine_b = {current_macro, 'selectioncount', 'searchcount'},
     lualine_c = {
+        {
+            'filename',
+            path = 3,
+            file_status = false,
+        }
     },
-    lualine_x = {'%b U+%B', 'searchcount'},
+    lualine_x = {'%b U+%B'},
     lualine_y = {'location'},
     lualine_z = {
-        'encoding',
         'fileformat',
+        'encoding',
     },
   },
 
@@ -46,13 +51,7 @@ require('lualine').setup {
   tabline = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {
-        {
-            'filename',
-            path = 3,
-            file_status = false,
-        }
-    },
+    lualine_c = {},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {{

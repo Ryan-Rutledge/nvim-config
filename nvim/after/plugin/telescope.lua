@@ -7,8 +7,8 @@ local plenary = require('plenary')
 telescope.setup({
     theme = 'tokyonight',
     defaults = {
-        prompt_prefix = "   ",
-        layout_strategy = 'center',
+        prompt_prefix = '   ',
+        layout_strategy = 'bottom_pane',
         mappings = {
             n = {
                 ['<A-p>'] = action_layout.toggle_preview,
@@ -17,16 +17,21 @@ telescope.setup({
                 ['<A-p>'] = action_layout.toggle_preview,
             },
         },
-        path_display = {"truncate"},
+        path_display = {'truncate'},
         winblend = 0,
         border = true,
         color_devicons = true,
-        selection_caret = "  ",
-        entry_prefix = "  ",
-        initial_mode = "insert",
-        sorting_strategy = "ascending",
+        multi_icon = ' ',
+        selection_caret = '  ',
+        entry_prefix = '  ',
+        initial_mode = 'insert',
+        sorting_strategy = 'ascending',
         show_line = false,
         trim_text = true,
+        vimgrep_arguments = {
+            '--no-heading',
+            '--smart-case'
+        }
     },
     pickers = {
         buffers = {
@@ -55,7 +60,7 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('noice')
 
-vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
+vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
 
 local opts = { noremap = true, silent = true }
 
@@ -74,8 +79,8 @@ vim.keymap.set('n', '\\\\', builtin.live_grep, opts)
 vim.keymap.set(
     'n', '<leader>\\\\',
     function()
-        local gitdir = vim.fn.finddir(".git", vim.fn.expand "%:p:p" .. ";")
-        if gitdir == "" then
+        local gitdir = vim.fn.finddir('.git', vim.fn.expand '%:p:p' .. ';')
+        if gitdir == '' then
             return nil
         end
 

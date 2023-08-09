@@ -9,9 +9,11 @@ require('noice').setup({
             silent = false
         },
     },
-      messages = {
+    messages = {
+        enabled = false,
+        view = 'messages',
         view_search = false,
-      },
+    },
     presets = {
         bottom_search = false,
         command_palette = false,
