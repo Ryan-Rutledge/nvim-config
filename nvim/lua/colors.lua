@@ -5,7 +5,7 @@ require('tokyonight').setup({
         keywords = { italic = false },
         sidebars = 'dark'
     },
-    sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'tagbar', 'Outline', 'termtoggle', 'Telescope' },
+    sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'tagbar', 'Outline', 'Telescope', 'toggleterm' },
     lualine_bold = true,
     on_highlights = function(highlights, colors)
         highlights.Cursor = { fg = colors.yellow, italic = false }
@@ -20,7 +20,6 @@ require('tokyonight').setup({
         highlights.TelescopeBorder = { fg = tele_bg, bg = tele_bg}
         highlights.TelescopePromptBorder = { fg = input_bg, bg = input_bg }
         highlights.TelescopePromptNormal = { bg = input_bg }
-        -- highlights.TelescopePromptCounter = { fg = colors.magenta }
         highlights.TelescopeTitle = { fg = colors.bg_dark, bg = colors.purple }
 
         local cmd_bg = colors.bg_dark

@@ -1,9 +1,8 @@
 require('toggleterm').setup({
     open_mapping = [[<c-\>]],
-    direction = 'float',
+    direction = 'tab',
     float_opts = {
-        border ='curved',
-        winblend = 15,
+        border = 'none',
     },
     autochdir = true,
     shade_terminals = false,
