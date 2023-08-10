@@ -56,7 +56,7 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {{
         'tabs',
-        mode = 1,
+        mode = 0,
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
     }},
@@ -66,7 +66,7 @@ require('lualine').setup {
     lualine_a = {'branch'},
     lualine_b = {{
         'filename',
-        path = 1,
+        path = 4,
         fmt = fancySlash,
     }},
     lualine_c = {{
@@ -83,7 +83,7 @@ require('lualine').setup {
         'branch',
         {
             'filename',
-            path = 1,
+            path = 4,
             fmt = fancySlash,
         }
     },

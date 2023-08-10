@@ -20,6 +20,7 @@ Plug('lukas-reineke/indent-blankline.nvim')  -- context highlighter
 Plug('nvim-lualine/lualine.nvim')  -- statusline/windowline/tabline customization
 Plug('MunifTanjim/nui.nvim')  -- ui components
 Plug('folke/noice.nvim') -- pretty input bar
+Plug('folke/todo-comments.nvim') -- comment tag highlights/search
 
 -- Git
 Plug('tpope/vim-fugitive')  -- git tooling

@@ -20,6 +20,12 @@ require('noice').setup({
         long_message_to_split = true,
         inc_rename = false,
         lsp_doc_border = false,
+    },
+    cmdline = {
+        format = {
+            search_down = { icon = ' ' },
+            search_up = { icon = '  ' },
+        }
     }
 })
 

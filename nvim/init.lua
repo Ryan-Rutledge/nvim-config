@@ -42,7 +42,7 @@ vim.opt.cursorcolumn = true
 -- flash yanked text
 vim.api.nvim_create_autocmd({'TextYankPost'}, {
     callback = function(_)
-        vim.highlight.on_yank({higroup='IncSearch', timeout=120})
+        vim.highlight.on_yank({higroup='@text.todo', timeout=150})
     end
 })
 
