@@ -14,10 +14,10 @@ require('lualine').setup {
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
-      winbar = {'NvimTree', 'tagbar', 'Outline', 'fugitive', 'toggleterm', '', },
-      tabline = {'NvimTree', 'tagbar', 'Outline'},
+      winbar = {'NvimTree', 'Outline', 'fugitive', },
+      tabline = {'NvimTree', 'Outline'},
     },
-    ignore_focus = {'NvimTree', 'tagbar'},
+    ignore_focus = {'NvimTree'},
     globalstatus = true,
   },
 

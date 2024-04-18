@@ -8,7 +8,7 @@ telescope.setup({
     theme = 'tokyonight',
     defaults = {
         prompt_prefix = '   ',
-        layout_strategy = 'bottom_pane',
+        layout_strategy = 'center',
         mappings = {
             n = {
                 ['<A-p>'] = action_layout.toggle_preview,
@@ -19,7 +19,7 @@ telescope.setup({
         },
         path_display = {'truncate'},
         winblend = 0,
-        border = false,
+        border = true,
         color_devicons = true,
         multi_icon = ' ',
         selection_caret = '  ',
@@ -88,6 +88,7 @@ vim.keymap.set(
 vim.keymap.set('n', '\\b', function() builtin.live_grep({ grep_open_files = true }) end, opts)
 
 -- vim.keymap.set('n', '\\t', builtin.treesitter, opts)
+vim.keymap.set('n', '<BS>', builtin.resume, opts)
 vim.keymap.set('n', '\\d', builtin.diagnostics, opts)
 vim.keymap.set('n', '\\D', function() builtin.diagnostics({ root_dir = true }) end, opts)
 

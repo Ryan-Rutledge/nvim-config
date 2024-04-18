@@ -11,8 +11,10 @@ nvimtree.setup({
     view = {
         signcolumn = 'auto',
         side = 'left',
+        width = '25%'
     },
     renderer = {
+        root_folder_label = ':~:s?$?/',
         highlight_git = true,
         icons = {
             git_placement = 'signcolumn',

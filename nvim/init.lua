@@ -36,6 +36,7 @@ vim.opt.mps:append({'<:>'})
 
 vim.opt.guifont='FiraCode Nerd Font'
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 
@@ -45,10 +46,31 @@ vim.fn.sign_define('DiagnosticSignWarn', {icon='󰔶', text='󰔶', texthl='Diag
 vim.fn.sign_define('DiagnosticSignInfo', {icon='󰌵', text='󰌵', texthl='DiagnosticInfo'})
 vim.fn.sign_define('DiagnosticSignHint', {icon='', text='', texthl='DiagnosticHint'})
 
+-- terminal
+_TermChannel = nil
+vim.api.nvim_create_autocmd({'TermOpen'}, {
+    callback = function(_)
+        _TermChannel = vim.o.channel
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+    end
+})
+vim.api.nvim_create_autocmd({'DirChanged'}, {
+    callback = function(_)
+        if _TermChannel ~= nil then
+            vim.fn.chansend(_TermChannel, ' cd ' .. vim.fn.expand("%:p:h") .. '\n')
+        end
+    end,
+})
+vim.api.nvim_create_autocmd({'TermClose'}, {
+    callback = function(_) _TermChannel = nil end
+})
+
+
 -- flash yanked text
 vim.api.nvim_create_autocmd({'TextYankPost'}, {
     callback = function(_)
-        vim.highlight.on_yank({higroup='@text.todo', timeout=150})
+        vim.highlight.on_yank({higroup='Todo', timeout=150})
     end
 })
 
@@ -57,6 +79,7 @@ vim.api.nvim_create_autocmd({'FileType'}, {
     pattern = 'help',
     callback = function(_)
         vim.opt.number = true
+        vim.opt_local.relativenumber = false
     end
 })
 
