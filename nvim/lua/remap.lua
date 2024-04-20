@@ -22,10 +22,6 @@ vim.keymap.set('x', '<leader>P', '"_dP', mopts)
 vim.keymap.set('x', '<leader>s', '"_ds', mopts)
 vim.keymap.set('x', '<leader>S', '"_dS', mopts)
 
--- tab movement
-vim.keymap.set('n', '<C-h>' , 'gT', mopts)
-vim.keymap.set('n', '<C-l>' , 'gt', mopts)
-
 -- terminal
 vim.keymap.set(
     'n', '<C-\\>',

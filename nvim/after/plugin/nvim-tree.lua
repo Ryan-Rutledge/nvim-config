@@ -10,8 +10,8 @@ nvimtree.setup({
     sync_root_with_cwd= true,
     view = {
         signcolumn = 'auto',
-        side = 'left',
-        width = '25%'
+        float = { enable = true, },
+        width = {}
     },
     renderer = {
         root_folder_label = ':~:s?$?/',
@@ -19,34 +19,23 @@ nvimtree.setup({
         icons = {
             git_placement = 'signcolumn',
             modified_placement = 'signcolumn',
-            symlink_arrow = '  ',
+            symlink_arrow = ' 󰛂 ',
             glyphs = {
                 git = {
-                    unstaged = '󰜥',
+                    unstaged = '󰏫',
                     staged = '',
                     unmerged = '',
                     renamed = '',
                     untracked = '󰓎',
                     deleted = '',
-                    ignored = '󰛑',
+                    ignored = '',
                 },
-                folder = {
-                  arrow_closed = '',
-                  arrow_open = '',
-                  default = '',
-                  open = '',
-                  empty = '',
-                  empty_open = '',
-                  symlink = '',
-                  symlink_open = '',
-                }
             }
         }
     },
     actions = {
         open_file = {
             quit_on_open = true,
-
             resize_window = true,
             window_picker = {
                 enable = true,
