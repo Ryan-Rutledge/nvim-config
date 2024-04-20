@@ -14,7 +14,6 @@ Plug('mbbill/undotree')  -- undo visualizer
 
 -- View
 Plug('nvim-tree/nvim-tree.lua')  -- file explorer
-Plug('lukas-reineke/indent-blankline.nvim')  -- context highlighter
 Plug('nvim-lualine/lualine.nvim')  -- statusline/windowline/tabline customization
 Plug('MunifTanjim/nui.nvim')  -- ui components
 Plug('folke/noice.nvim') -- pretty input bar
