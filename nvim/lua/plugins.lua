@@ -13,9 +13,7 @@ Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('mbbill/undotree')  -- undo visualizer
 
 -- View
--- Plug('nvim-tree/nvim-web-devicons')  -- icons
 Plug('nvim-tree/nvim-tree.lua')  -- file explorer
-Plug('nvim-treesitter/nvim-treesitter-context')  -- sticky headers
 Plug('lukas-reineke/indent-blankline.nvim')  -- context highlighter
 Plug('nvim-lualine/lualine.nvim')  -- statusline/windowline/tabline customization
 Plug('MunifTanjim/nui.nvim')  -- ui components
