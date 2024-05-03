@@ -1,21 +1,22 @@
-local fancySlash = function(filename)
-    return filename:gsub('/', '  ')
-end
-
+local lualine = require('lualine')
+local refresh = function(_) lualine.refresh({ place = { 'statusline' } }) end
+vim.api.nvim_create_autocmd({'RecordingEnter'}, { callback = refresh })
+vim.api.nvim_create_autocmd({'RecordingLeave'}, { callback = refresh })
+local function window() return vim.api.nvim_win_get_number(0) end
 local function current_macro()
     local register = vim.fn.reg_recording()
     return register == '' and '' or ('@' .. register)
 end
 
-require('lualine').setup {
+lualine.setup {
   options = {
     theme = 'tokyonight',
     -- SYMBOL REFERENCE: - 
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
-      winbar = {'NvimTree', 'Outline', 'fugitive', },
-      tabline = {'NvimTree', 'Outline'},
+      winbar = {'NvimTree', 'Outline', 'fugitive', 'undotree'},
+      tabline = {'NvimTree', 'Outline', 'term'},
     },
     ignore_focus = {'NvimTree'},
     globalstatus = true,
@@ -24,18 +25,14 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {current_macro, 'selectioncount', 'searchcount'},
-    lualine_c = {
-        {
-            'filename',
-            path = 3,
-            file_status = false,
-        }
-    },
+    lualine_c = {},
     lualine_x = {'%b U+%B'},
     lualine_y = {'location'},
     lualine_z = {
-        'fileformat',
+        'branch',
+        '%Y',
         'encoding',
+        'fileformat',
     },
   },
 
@@ -49,9 +46,15 @@ require('lualine').setup {
   -- },
 
   tabline = {
-    lualine_a = {},
+    lualine_a = {{
+        'windows',
+        show_modified_status = false,
+        fmt = function(f) return f:gsub('%..+', '') end,
+        mode = 2,
+    }},
     lualine_b = {},
-    lualine_c = {},
+    lualine_c = {
+    },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {{
@@ -63,36 +66,43 @@ require('lualine').setup {
   },
 
   winbar = {
-    lualine_a = {'branch'},
-    lualine_b = {{
-        'filename',
-        path = 4,
-        fmt = fancySlash,
-    }},
+    lualine_a = {
+        window,
+    },
+    lualine_b = {
+        '%m%w%r%h'
+    },
     lualine_c = {{
         'diagnostics',
         symbols = { error = '󰏃 ', warn = '󰔶 ', info = '󰌵 ', hint = ' ' },
     }},
     lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
+    lualine_y = {
+        '%{expand("%:~:h:h")}',
+    },
+    lualine_z = {
+        '%{expand("%:~:h:t")}',
+        '%t'
+    },
   },
 
   inactive_winbar = {
     lualine_a = {
-        'branch',
-        {
-            'filename',
-            path = 4,
-            fmt = fancySlash,
-        }
+        window,
     },
-    lualine_b = {},
+    lualine_b = {
+        '%m%w%r%h'
+    },
     lualine_c = {},
     lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
+    lualine_y = {
+        '%{expand("%:~:h:h")}',
+    },
+    lualine_z = {
+        '%{expand("%:~:h:t")}',
+        '%t'
+    },
   },
 }
 
-vim.opt.showtabline = 1
+-- vim.opt.showtabline = 1
