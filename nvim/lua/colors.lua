@@ -8,8 +8,7 @@ require('tokyonight').setup({
     sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'tagbar', 'Outline', 'Telescope', 'toggleterm' },
     lualine_bold = true,
     on_highlights = function(highlights, colors)
-        highlights.Cursor = { fg = colors.yellow, italic = false }
-        highlights.Comment = { fg = colors.magenta2, italic = false }
+        highlights.Comment = { fg = '#FFFFFF', italic = false }
 
         -- local tele_bg = colors.bg
         -- local input_bg = colors.bg_dark
@@ -27,6 +26,7 @@ require('tokyonight').setup({
         highlights.NoiceCmdlinePopupBorder = { bg = cmd_bg, fg = cmd_bg }
         highlights.NoiceCmdlinePopupBorderSearch = { bg = cmd_bg, fg = cmd_bg }
         highlights.NoiceCmdlinePopup = { bg = cmd_bg }
+        highlights.NoiceCmdlinePropt = { fg = colors.magenta2 }
 
         highlights.CursorLineNr = { fg = colors.dark5 }
         highlights.CursorLineNr = { fg = colors.magenta, bg = colors.bg_highlight }
