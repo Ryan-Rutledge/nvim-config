@@ -17,7 +17,9 @@ telescope.setup({
                 ['<A-p>'] = action_layout.toggle_preview,
             },
         },
-        path_display = {'truncate'},
+        path_display = {
+            filename_first = { reverse_directories = true }
+        },
         winblend = 0,
         border = true,
         color_devicons = true,
@@ -88,7 +90,7 @@ vim.keymap.set(
 vim.keymap.set('n', '\\b', function() builtin.live_grep({ grep_open_files = true }) end, opts)
 
 -- vim.keymap.set('n', '\\t', builtin.treesitter, opts)
-vim.keymap.set('n', '<BS>', builtin.resume, opts)
+vim.keymap.set('n', '\\<BS>', builtin.resume, opts)
 vim.keymap.set('n', '\\d', builtin.diagnostics, opts)
 vim.keymap.set('n', '\\D', function() builtin.diagnostics({ root_dir = true }) end, opts)
 
