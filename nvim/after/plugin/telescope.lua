@@ -89,7 +89,7 @@ vim.keymap.set(
 )
 vim.keymap.set('n', '\\b', function() builtin.live_grep({ grep_open_files = true }) end, opts)
 
--- vim.keymap.set('n', '\\t', builtin.treesitter, opts)
+vim.keymap.set('n', '\\T', builtin.treesitter, opts)
 vim.keymap.set('n', '\\<BS>', builtin.resume, opts)
 vim.keymap.set('n', '\\d', builtin.diagnostics, opts)
 vim.keymap.set('n', '\\D', function() builtin.diagnostics({ root_dir = true }) end, opts)
@@ -105,8 +105,6 @@ vim.keymap.set('n', '\\c', function() builtin.lsp_document_symbols({symbols = 'c
 vim.keymap.set('n', '\\C', function() builtin.lsp_workspace_symbols({symbols = 'class'}) end, opts)
 vim.keymap.set('n', '\\f', function() builtin.lsp_document_symbols({symbols = {'function', 'method', 'constructor', 'property'}}) end, opts)
 vim.keymap.set('n', '\\F', function() builtin.lsp_workspace_symbols({symbols = {'function', 'method', 'constructor', 'property'}}) end, opts)
-vim.keymap.set('n', '\\m', function() builtin.lsp_document_symbols({symbols = 'module'}) end, opts)
-vim.keymap.set('n', '\\M', function() builtin.lsp_workspace_symbols({symbols = 'module'}) end, opts)
 
 -- vim
 vim.keymap.set('n', '\\q', builtin.quickfix, opts)
@@ -121,7 +119,7 @@ vim.keymap.set('n', '<leader>\\k', builtin.keymaps, opts)
 vim.keymap.set('n', '<leader>\\n', ':NoiceTelescope<CR>', {noremap = true, silent = true})
 
 -- terminal
--- vim.keymap.set('n', '\\T', builtin.man_pages, opts)
+vim.keymap.set('n', '\\m', builtin.man_pages, opts)
 
 -- git
 vim.keymap.set('n', '<C-p>', function() builtin.git_files({ show_untracked = true }) end, opts)

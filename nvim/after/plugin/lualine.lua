@@ -1,12 +1,9 @@
+local ts = require('nvim-treesitter')
 local lualine = require('lualine')
 local refresh = function(_) lualine.refresh({ place = { 'statusline' } }) end
 vim.api.nvim_create_autocmd({'RecordingEnter'}, { callback = refresh })
 vim.api.nvim_create_autocmd({'RecordingLeave'}, { callback = refresh })
 local function window() return vim.api.nvim_win_get_number(0) end
-local function current_macro()
-    local register = vim.fn.reg_recording()
-    return register == '' and '' or ('@' .. register)
-end
 
 lualine.setup {
   options = {
@@ -24,8 +21,24 @@ lualine.setup {
 
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {current_macro, 'selectioncount', 'searchcount'},
-    lualine_c = {},
+    lualine_b = {
+        function ()
+            local register = vim.fn.reg_recording()
+            return register == '' and '' or ('@' .. register)
+        end,
+        'selectioncount',
+        'searchcount'},
+    lualine_c = {
+        function()
+            return ts.statusline({
+                type_patterns={'class', 'method', 'function' },
+                separator='  ',
+                transform_fn = function(line, node)
+                    return line:gsub('%s*[%[%(%{:].*$', '')
+                end,
+            })
+        end,
+    },
     lualine_x = {'%b U+%B'},
     lualine_y = {'location'},
     lualine_z = {
@@ -70,7 +83,7 @@ lualine.setup {
         window,
     },
     lualine_b = {
-        '%m%w%r%h'
+        '%m%w%r%h',
     },
     lualine_c = {{
         'diagnostics',
