@@ -56,7 +56,6 @@ telescope.setup({
 })
 
 telescope.load_extension('fzf')
-telescope.load_extension('noice')
 
 vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
 
@@ -116,7 +115,6 @@ vim.keymap.set('n', '<leader>\\<F1>', builtin.help_tags, opts)
 vim.keymap.set('n', '<leader>\\m', builtin.marks, opts)
 vim.keymap.set('n', '<leader>\\h', builtin.highlights, opts)
 vim.keymap.set('n', '<leader>\\k', builtin.keymaps, opts)
-vim.keymap.set('n', '<leader>\\n', ':NoiceTelescope<CR>', {noremap = true, silent = true})
 
 -- terminal
 vim.keymap.set('n', '\\m', builtin.man_pages, opts)

@@ -17,7 +17,6 @@ Plug('nvim-tree/nvim-tree.lua')  -- file explorer
 Plug('nvim-tree/nvim-web-devicons')  -- file explorer icons
 Plug('nvim-lualine/lualine.nvim')  -- statusline/windowline/tabline customization
 Plug('MunifTanjim/nui.nvim')  -- ui components
-Plug('folke/noice.nvim') -- pretty input bar
 Plug('folke/todo-comments.nvim') -- comment tag highlights/search
 
 -- Git

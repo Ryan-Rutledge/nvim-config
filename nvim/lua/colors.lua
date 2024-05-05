@@ -21,13 +21,6 @@ require('tokyonight').setup({
         -- highlights.TelescopePromptNormal = { bg = input_bg }
         -- highlights.TelescopeTitle = { fg = colors.bg_dark, bg = colors.purple }
 
-        local cmd_bg = colors.bg_dark
-        highlights.NoiceCmdLinePopupTitle = { fg = cmd_bg, bg = cmd_bg }
-        highlights.NoiceCmdlinePopupBorder = { bg = cmd_bg, fg = cmd_bg }
-        highlights.NoiceCmdlinePopupBorderSearch = { bg = cmd_bg, fg = cmd_bg }
-        highlights.NoiceCmdlinePopup = { bg = cmd_bg }
-        highlights.NoiceCmdlinePropt = { fg = colors.magenta2 }
-
         highlights.CursorLineNr = { fg = colors.dark5 }
         highlights.CursorLineNr = { fg = colors.magenta, bg = colors.bg_highlight }
         highlights.IncSearch = { fg = '#000000', bg = colors.magenta }
