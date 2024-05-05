@@ -5,12 +5,14 @@ vim.call('plug#begin')
 -- Libraries
 Plug('nvim-lua/plenary.nvim')  -- common library
 Plug('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })  -- parsing library
+Plug('nvim-treesitter/nvim-treesitter-textobjects', { run = ':TSUpdate' })  -- parsing library
 -- Plug('nvim-treesitter/playground', { run = ':TSUpdate' })
 
 -- Navigation
 Plug('nvim-telescope/telescope.nvim')  -- fuzzy search
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('mbbill/undotree')  -- undo visualizer
+Plug('folke/flash.nvim') -- search navigation
 
 -- View
 Plug('nvim-tree/nvim-tree.lua')  -- file explorer
