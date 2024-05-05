@@ -18,5 +18,4 @@ require('flash').setup({
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>/', require('flash').jump, opts)
-vim.keymap.set({ 'n', 'x', 'o' }, 's', function() require('flash').jump() end, opts)
-vim.keymap.set({ 'x', 'o' }, 's', require('flash').treesitter, opts)
+vim.keymap.set({ 'x', 'o' }, '<leader>/', require('flash').treesitter, opts)
