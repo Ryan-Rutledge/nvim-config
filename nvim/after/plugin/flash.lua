@@ -8,6 +8,7 @@ require('flash').setup({
     modes = {
         char = { enabled = false },
         search = {
+            enabled = false,
             jump = { nohlsearch = false },
         },
         treesitter = {
