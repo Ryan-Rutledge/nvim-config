@@ -22,6 +22,10 @@ vim.keymap.set('x', '<leader>P', '"_dP', mopts)
 vim.keymap.set('x', '<leader>s', '"_ds', mopts)
 vim.keymap.set('x', '<leader>S', '"_dS', mopts)
 
+vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>') 
+
 -- terminal
 vim.keymap.set(
     'n', '<C-\\>',

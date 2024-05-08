@@ -8,7 +8,7 @@ tokyonight.setup({
         keywords = { italic = false },
         sidebars = 'dark'
     },
-    sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'tagbar', 'Outline', 'Telescope', 'toggleterm' },
+    sidebars = { 'qf', 'help', 'fugitive', 'NvimTree', 'Outline', 'Telescope',},
     lualine_bold = true,
     on_highlights = function(highlights, colors)
         highlights.Comment = { fg = '#FFFFFF', italic = false }
@@ -24,7 +24,6 @@ tokyonight.setup({
         -- highlights.TelescopePromptNormal = { bg = input_bg }
         -- highlights.TelescopeTitle = { fg = colors.bg_dark, bg = colors.purple }
 
-
         highlights.Visual = { bg = util.blend(colors.purple, colors.black, 0.3) }
         highlights.CursorLineNr = { fg = colors.dark5 }
         highlights.CursorLineNr = { fg = colors.magenta, bg = colors.bg_highlight }
@@ -35,4 +34,11 @@ tokyonight.setup({
 
 vim.cmd[[colorscheme tokyonight]]
 
+
+-- flash yanked text
+vim.api.nvim_create_autocmd({'TextYankPost'}, {
+    callback = function(_)
+        vim.highlight.on_yank({higroup='TodoBgPERF', timeout=150})
+    end
+})
 

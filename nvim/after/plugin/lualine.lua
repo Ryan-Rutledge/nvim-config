@@ -60,10 +60,10 @@ lualine.setup {
 
   tabline = {
     lualine_a = {{
-        'windows',
-        show_modified_status = false,
-        fmt = function(f) return f:gsub('%..+', '') end,
-        mode = 2,
+        'tabs',
+        mode = 0,
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
     }},
     lualine_b = {},
     lualine_c = {
@@ -71,49 +71,49 @@ lualine.setup {
     lualine_x = {},
     lualine_y = {},
     lualine_z = {{
-        'tabs',
-        mode = 0,
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
+        'windows',
+        show_modified_status = false,
+        fmt = function(f) return f:gsub('%..+', '') end,
+        mode = 2,
     }},
   },
 
   winbar = {
     lualine_a = {
-        window,
+        '%{expand("%:~:h:t")}',
+        '%t'
     },
     lualine_b = {
-        '%m%w%r%h',
+        '%{expand("%:~:h:h")}',
     },
-    lualine_c = {{
+    lualine_c = {},
+    lualine_x = {{
         'diagnostics',
         symbols = { error = '󰏃 ', warn = '󰔶 ', info = '󰌵 ', hint = ' ' },
     }},
-    lualine_x = {},
     lualine_y = {
-        '%{expand("%:~:h:h")}',
+        '%m%w%r%h',
     },
     lualine_z = {
-        '%{expand("%:~:h:t")}',
-        '%t'
+        window,
     },
   },
 
   inactive_winbar = {
     lualine_a = {
-        window,
+        '%{expand("%:~:h:t")}',
+        '%t'
     },
     lualine_b = {
-        '%m%w%r%h'
+        '%{expand("%:~:h:h")}',
     },
     lualine_c = {},
     lualine_x = {},
     lualine_y = {
-        '%{expand("%:~:h:h")}',
+        '%m%w%r%h'
     },
     lualine_z = {
-        '%{expand("%:~:h:t")}',
-        '%t'
+        window,
     },
   },
 }

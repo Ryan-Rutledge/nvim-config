@@ -29,17 +29,15 @@ Plug('lewis6991/gitsigns.nvim')  -- git visual/movement
 Plug('preservim/nerdcommenter')  -- comment lines shortcuts
 Plug('vim-test/vim-test')
 
--- LSP Support
-Plug('neovim/nvim-lspconfig')
+-- LSP/cmp
 Plug('williamboman/mason.nvim', { run = ':MasonUpdate' })
 Plug('williamboman/mason-lspconfig.nvim')
-
--- Autocompletion
+Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
-Plug('L3MON4D3/LuaSnip')
-Plug('VonHeikemen/lsp-zero.nvim', { branch = 'v2.x' })
 Plug('ray-x/lsp_signature.nvim')
+-- Plug('L3MON4D3/LuaSnip', {['tag'] = 'v2.*', ['do'] = 'make install_jsregexp'})
+-- Plug('saadparwaiz1/cmp_luasnip')
 -- Plug('folke/neodev.nvim') -- vim dev lua support
 
 -- colorschemes
