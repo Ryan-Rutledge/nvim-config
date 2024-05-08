@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd({'TermClose'}, {
 -- flash yanked text
 vim.api.nvim_create_autocmd({'TextYankPost'}, {
     callback = function(_)
-        vim.highlight.on_yank({higroup='Todo', timeout=150})
+        vim.highlight.on_yank({higroup='TodoBgPERF', timeout=150})
     end
 })
 

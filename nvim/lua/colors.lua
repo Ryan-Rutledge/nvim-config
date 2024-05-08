@@ -25,7 +25,7 @@ tokyonight.setup({
         -- highlights.TelescopeTitle = { fg = colors.bg_dark, bg = colors.purple }
 
 
-        highlights.Visual = { bg = util.blend(colors.yellow, colors.black, 0.25) }
+        highlights.Visual = { bg = util.blend(colors.purple, colors.black, 0.3) }
         highlights.CursorLineNr = { fg = colors.dark5 }
         highlights.CursorLineNr = { fg = colors.magenta, bg = colors.bg_highlight }
         highlights.IncSearch = { fg = '#000000', bg = colors.magenta }
