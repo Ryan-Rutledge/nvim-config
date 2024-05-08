@@ -4,8 +4,8 @@ vim.call('plug#begin')
 
 -- Libraries
 Plug('nvim-lua/plenary.nvim')  -- common library
-Plug('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })  -- parsing library
-Plug('nvim-treesitter/nvim-treesitter-textobjects', { run = ':TSUpdate' })  -- parsing library
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })  -- parsing library
+Plug('nvim-treesitter/nvim-treesitter-textobjects')  -- parsing library
 -- Plug('nvim-treesitter/playground', { run = ':TSUpdate' })
 
 -- Navigation
