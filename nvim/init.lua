@@ -1,11 +1,20 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+vim.loader.enable()
+vim.g.mapleader = ' '
 
-require('plugins')
-require('colors')
-require('remap')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require('lazy').setup('plugins')
 
--- general support
 vim.opt.cmdheight = 0
 vim.opt.linebreak = true
 vim.opt.showmatch = false
@@ -33,15 +42,17 @@ vim.opt.foldnestmax = 1
 vim.opt.foldtext = ''
 vim.opt.foldenable = false
 vim.opt.mps:append({'<:>'})
+vim.opt.formatoptions:remove({'c', 'r', 'o'})
 
 vim.opt.guifont='FiraCode Nerd Font'
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
+vim.opt.showtabline = 1
 
 -- terminal
-_TermChannel = nil
+local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {
     callback = function(_)
         _TermChannel = vim.o.channel
@@ -76,3 +87,47 @@ vim.api.nvim_create_autocmd({'FileType'}, {
         vim.opt_local.formatprg = 'black -q -'
     end
 })
+
+local mopts = { silent = true, noremap = true }
+vim.keymap.set('n', 'U', '<C-r>', mopts)
+vim.keymap.set('n', 'Y', 'y$', mopts)
+vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { silent = true })
+vim.keymap.set('n', '<leader>L', ':set relativenumber!<CR>', mopts)
+vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', mopts)
+vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
+vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', mopts)
+vim.keymap.set('n', '<leader>q', ':helpclose<CR>', mopts)
+
+-- movement
+vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', mopts)
+vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', mopts)
+vim.keymap.set('n', '<leader>-' , ':bp|bd #<CR>', mopts)
+vim.keymap.set('n', '<leader>`' , ':b #<CR>', mopts)
+
+-- paste
+vim.keymap.set('x', '<leader>p', '"_dp', mopts)
+vim.keymap.set('x', '<leader>P', '"_dP', mopts)
+vim.keymap.set('x', '<leader>s', '"_ds', mopts)
+vim.keymap.set('x', '<leader>S', '"_dS', mopts)
+
+vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+
+-- terminal
+vim.keymap.set(
+    'n', '<C-\\>',
+    function()
+        if not pcall(function() vim.cmd(':b term://') end) then
+            vim.api.nvim_command('terminal')
+        end
+
+        vim.cmd('startinsert')
+    end,
+    mopts
+)
+vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', mopts)
+vim.keymap.set('t', '<C-\\>', '<C-\\><C-N>:b #<CR>', mopts)
+vim.keymap.set('t', '<M-f>', function()
+    vim.fn.chansend(vim.o.channel, ' cd ' .. vim.fn.expand("#:p:h") .. '\n')
+end, mopts)
