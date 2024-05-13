@@ -1,7 +1,7 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim'},
+        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim', 'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-args.nvim'},
         keys = {
             {'gi', function() require('telescope.builtin').lsp_implementations() end },
             {'gr', function() require('telescope.builtin').lsp_references() end },
@@ -39,8 +39,27 @@ return {
             {'\\B', function() require('telescope.builtin').git_branches() end },
             {'\\g', function() require('telescope.builtin').git_bcommits() end },
             {'\\g', function() require('telescope.builtin').git_bcommits_range() end, mode='v' },
+            { '<leader>F', ':Telescope file_browser path=%:p:h select_buffer=true<CR>' },
+            {
+                '\\\\',
+                function()
+                    local args = {}
+                    local gitdir = vim.fn.finddir('.git', vim.fn.expand '%:p:p' .. ';')
+                    if gitdir ~= '' then
+                        local repodir = require('plenary').path:new(gitdir):parent():absolute()
+                        args = { search_dirs = { repodir } }
+                    end
+
+                    require('telescope').extensions.live_grep_args.live_grep_args( args)
+                end
+            },
         },
-        config = function()
+        config = function(_, opts)
+            require('telescope').setup(opts)
+
+            require('telescope').load_extension('fzf')
+            require('telescope').load_extension('live_grep_args')
+            require('telescope').load_extension('file_browser')
             vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
         end,
         opts = function() return {
@@ -111,45 +130,4 @@ return {
             },
         } end,
     },
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        dependencies = { 'nvim-telescope/telescope.nvim' },
-        build = 'make',
-        event = 'VeryLazy',
-        config = function()
-            require('telescope').load_extension('fzf')
-        end,
-    },
-    {
-        'nvim-telescope/telescope-file-browser.nvim',
-        dependencies = { 'nvim-telescope/telescope.nvim' },
-        config = function()
-            require('telescope').load_extension('file_browser')
-        end,
-        keys = {
-            { '<leader>F', ':Telescope file_browser path=%:p:h select_buffer=true<CR>' }
-        }
-    },
-    {
-        'nvim-telescope/telescope-live-grep-args.nvim',
-        dependencies = { 'nvim-telescope/telescope.nvim' },
-        config = function()
-            require('telescope').load_extension('live_grep_args')
-        end,
-        keys = {
-            {
-                '\\\\',
-                function()
-                    local args = {}
-                    local gitdir = vim.fn.finddir('.git', vim.fn.expand '%:p:p' .. ';')
-                    if gitdir ~= '' then
-                        local repodir = require('plenary').path:new(gitdir):parent():absolute()
-                        args = { search_dirs = { repodir } }
-                    end
-
-                    require('telescope').extensions.live_grep_args.live_grep_args( args)
-                end
-            },
-        }
-    }
 }
