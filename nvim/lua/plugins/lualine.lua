@@ -75,10 +75,11 @@ return {
 
             winbar = {
                 lualine_a = {
+                    '%{expand("%:~:h:t")}',
                     'filename'
                 },
                 lualine_b = {
-                    '%{expand("%:~:h")}',
+                    '%{expand("%:~:h:h")}',
                 },
                 lualine_c = {},
                 lualine_x = {{
@@ -91,10 +92,11 @@ return {
 
             inactive_winbar = {
                 lualine_a = {
+                    '%{expand("%:~:h:t")}',
                     'filename'
                 },
                 lualine_b = {
-                    '%{expand("%:~:h")}',
+                    '%{expand("%:~:h:h")}',
                 },
                 lualine_c = {},
                 lualine_x = {},
