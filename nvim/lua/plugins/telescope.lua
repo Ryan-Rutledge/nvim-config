@@ -50,7 +50,7 @@ return {
                         args = { search_dirs = { repodir } }
                     end
 
-                    require('telescope').extensions.live_grep_args.live_grep_args( args)
+                    require('telescope').extensions.live_grep_args.live_grep_args(args)
                 end
             },
         },
@@ -101,8 +101,8 @@ return {
                 live_grep_args = {
                     mappings = {
                         i = {
-                            ["<C-k>"] = function() return require("telescope-live-grep-args.actions").quote_prompt() end,
-                            ["<C-i>"] = function() return require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }) end,
+                            ['<C-k>'] = require('telescope-live-grep-args.actions').quote_prompt(),
+                            ['<C-i>'] = require('telescope-live-grep-args.actions').quote_prompt({ postfix = ' --iglob ' }),
                         },
                     },
                 }

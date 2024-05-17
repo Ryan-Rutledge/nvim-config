@@ -45,8 +45,8 @@ vim.opt.mps:append({'<:>'})
 vim.opt.formatoptions:remove({'c', 'r', 'o'})
 
 vim.opt.guifont='FiraCode Nerd Font'
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 vim.opt.showtabline = 1
@@ -80,6 +80,8 @@ vim.api.nvim_create_autocmd({'FileType'}, {
     end
 })
 
+local mopts = { silent = true, noremap = true }
+
 -- formatter
 vim.api.nvim_create_autocmd({'FileType'}, {
     pattern = 'python',
@@ -88,11 +90,11 @@ vim.api.nvim_create_autocmd({'FileType'}, {
     end
 })
 
-local mopts = { silent = true, noremap = true }
 vim.keymap.set('n', 'U', '<C-r>', mopts)
 vim.keymap.set('n', 'Y', 'y$', mopts)
 vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { silent = true })
 vim.keymap.set('n', '<leader>L', ':set relativenumber!<CR>', mopts)
+vim.keymap.set('n', '<leader>l', ':set number!<CR>', mopts)
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', mopts)
 vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
 vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', mopts)

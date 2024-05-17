@@ -36,9 +36,9 @@ return {
             })
 
             vim.diagnostic.config({
-            virtual_text = false,
-            severity_sort = true,
-            float = { border = 'rounded', source = 'always' },
+                virtual_text = false,
+                severity_sort = true,
+                float = { border = 'rounded', source = 'always' },
             })
 
             vim.fn.sign_define('DiagnosticSignError', {icon='󰏃', text='󰏃', texthl='DiagnosticError'})
