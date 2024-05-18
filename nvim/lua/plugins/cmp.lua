@@ -41,5 +41,14 @@ return {
         'hrsh7th/cmp-nvim-lsp',
         dependencies = { 'hrsh7th/nvim-cmp' },
         event = 'VeryLazy',
+    },
+    {
+        'ray-x/lsp_signature.nvim',
+        event = 'BufReadPre',
+        opts = {
+            bind = true,
+            hi_parameter = 'BufferCurrentTarget',
+            hint_enable = false,
+        },
     }
 }

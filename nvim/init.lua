@@ -51,7 +51,6 @@ vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 vim.opt.showtabline = 1
 
--- terminal
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {
     callback = function(_)
@@ -82,19 +81,13 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 
 local mopts = { silent = true, noremap = true }
 
--- formatter
-vim.api.nvim_create_autocmd({'FileType'}, {
-    pattern = 'python',
-    callback = function(_)
-        vim.opt_local.formatprg = 'black -q -'
-    end
-})
-
 vim.keymap.set('n', 'U', '<C-r>', mopts)
 vim.keymap.set('n', 'Y', 'y$', mopts)
 vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { silent = true })
-vim.keymap.set('n', '<leader>L', ':set relativenumber!<CR>', mopts)
-vim.keymap.set('n', '<leader>l', ':set number!<CR>', mopts)
+vim.keymap.set('n', '<leader>L', function() vim.opt.relativenumber = not vim.opt.relativenumber:get() end, mopts)
+vim.keymap.set('n', '<leader>l', function() vim.opt.number = not vim.opt.number:get() end, mopts)
+
+-- vim.opt.relativenumber = false
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', mopts)
 vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
 vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', mopts)
@@ -104,7 +97,7 @@ vim.keymap.set('n', '<leader>q', ':helpclose<CR>', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', mopts)
 vim.keymap.set('n', '<leader>-' , ':bp|bd #<CR>', mopts)
-vim.keymap.set('n', '<leader>`' , ':b #<CR>', mopts)
+vim.keymap.set('n', '<leader>`' , function() vim.cmd('b #') end, mopts)
 
 -- paste
 vim.keymap.set('x', '<leader>p', '"_dp', mopts)
@@ -116,7 +109,6 @@ vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 
--- terminal
 vim.keymap.set(
     'n', '<C-\\>',
     function()

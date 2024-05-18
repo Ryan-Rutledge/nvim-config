@@ -23,14 +23,15 @@ return {
             sections = {
                 lualine_a = {'mode'},
                 lualine_b = {
+                    'selectioncount',
+                    'searchcount',
                     function ()
                         local register = vim.fn.reg_recording()
                         return register == '' and '' or ('@' .. register)
                     end,
-                    'selectioncount',
-                    'searchcount'
                 },
                 lualine_c = {
+                    'location',
                     -- function()
                     --     return ts.statusline({
                     --         type_patterns={'class', 'method', 'function' },
@@ -42,7 +43,7 @@ return {
                     -- end,
                 },
                 lualine_x = {'%b U+%B'},
-                lualine_y = {'location'},
+                lualine_y = {'branch'},
                 lualine_z = {
                     'encoding',
                     'fileformat',
@@ -76,7 +77,7 @@ return {
             winbar = {
                 lualine_a = {
                     '%{expand("%:~:h:t")}',
-                    'filename'
+                    'filename',
                 },
                 lualine_b = {
                     '%{expand("%:~:h:h")}',

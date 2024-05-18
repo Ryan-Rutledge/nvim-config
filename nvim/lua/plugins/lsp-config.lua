@@ -3,6 +3,7 @@ return {
         'neovim/nvim-lspconfig',
         dependencies = {
             'williamboman/mason-lspconfig.nvim',
+            -- { "folke/neodev.nvim", opts = {} },
         },
         event = { 'BufReadPre', 'BufNewFile' },
         config = function()
@@ -24,14 +25,15 @@ return {
                 desc = 'LSP actions',
                 callback = function(event)
                     local opts = { buffer = event.buf, silent = true, noremap = true  }
-                    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-                    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-                    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-                    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-                    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-                    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-                    vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-                    vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                    vim.keymap.set('i', '<A-k>', vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+                    vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, opts)
+                    vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
+                    vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({async = true}) end, opts)
+                    vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, opts)
                 end
             })
 
@@ -58,15 +60,4 @@ return {
         event = 'VeryLazy',
         dependencies = { 'williamboman/mason.nvim' }
     },
-    {
-        'ray-x/lsp_signature.nvim',
-        event = 'InsertEnter',
-        opts = {
-            bind = true,
-            hi_parameter = 'BufferCurrentTarget',
-            floating_window_off_y = -2,
-            hint_enable = false,
-            floating_window_above_cur_line = false,
-        },
-    }
 }
