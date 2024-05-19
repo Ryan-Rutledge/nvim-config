@@ -26,10 +26,9 @@ return {
                 highlights.IncSearch = { fg = colors.black, bg = colors.magenta }
                 highlights.Search = { fg = colors.black, bg = colors.yellow }
                 highlights.DiagnosticUnnecessary = { fg = colors.dark5 }
+                highlights.StatusLine = { fg = colors.fg, bg = colors.bg }
             end,
         })
-
-        vim.cmd[[colorscheme tokyonight]]
 
         -- flash yanked text
         vim.api.nvim_create_autocmd({'TextYankPost'}, {
@@ -37,5 +36,7 @@ return {
                 vim.highlight.on_yank({higroup='YankyYanked', timeout=180})
                 end
         })
+
+        vim.cmd[[colorscheme tokyonight]]
     end
 }

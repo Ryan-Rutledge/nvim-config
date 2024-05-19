@@ -8,7 +8,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
@@ -16,6 +16,9 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup('plugins')
 
 vim.opt.cmdheight = 0
+-- vim.opt.laststatus = 3
+vim.opt.showcmdloc = 'statusline'
+vim.opt.showcmd = true
 vim.opt.linebreak = true
 vim.opt.showmatch = false
 vim.opt.wrap = false
@@ -49,7 +52,46 @@ vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
+
 vim.opt.showtabline = 1
+vim.g.tabline = function()
+    local cur = vim.fn.tabpagenr()
+    local s = {'%='}
+
+    for i=1,vim.fn.tabpagenr('$') do
+        if i == cur then
+            table.insert(s, '%#TabLineSel#')
+        else
+            table.insert(s, '%#TabLine#')
+        end
+
+        table.insert(s, '%')
+        table.insert(s, i)
+        table.insert(s, 'T ')
+        table.insert(s, i)
+        table.insert(s, ' ')
+    end
+
+    table.insert(s, '%#TabLineFill#%T')
+
+    return table.concat(s, '')
+end
+vim.opt.tabline='%!g:tabline()'
+
+vim.g.macroStr = ''
+vim.api.nvim_create_autocmd({'RecordingEnter'}, {
+    callback = function()
+        vim.g.macroStr = '@' .. vim.fn.reg_recording()
+        vim.opt.statusline = vim.opt.statusline
+    end
+})
+vim.api.nvim_create_autocmd({'RecordingLeave'}, {
+    callback = function()
+        vim.g.macroStr = ''
+        vim.opt.statusline = vim.opt.statusline
+    end
+})
+vim.opt.statusline = '%#TSRainbowBlue#%m%w%q%h%#TSRainbowViolet#%t%* %{expand("%:~:h")}%=%#TSRainbowOrange#%S%#TSRainbowRed#%{g:macroStr} %7(%#TSRainbowYellow#%l,%-3c%) %10(%#TSRainbowCyan#%b U+%04B%) %*%#TSRainbowGreen#%Y%*'
 
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {
@@ -70,7 +112,6 @@ vim.api.nvim_create_autocmd({'TermClose'}, {
     callback = function(_) _TermChannel = nil end
 })
 
--- numbers in help pages
 vim.api.nvim_create_autocmd({'FileType'}, {
     pattern = 'help',
     callback = function(_)
@@ -87,23 +128,23 @@ vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { silent = true })
 vim.keymap.set('n', '<leader>L', function() vim.opt.relativenumber = not vim.opt.relativenumber:get() end, mopts)
 vim.keymap.set('n', '<leader>l', function() vim.opt.number = not vim.opt.number:get() end, mopts)
 
--- vim.opt.relativenumber = false
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', mopts)
 vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
 vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', mopts)
 vim.keymap.set('n', '<leader>q', ':helpclose<CR>', mopts)
 
--- movement
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', mopts)
 vim.keymap.set('n', '<leader>-' , ':bp|bd #<CR>', mopts)
 vim.keymap.set('n', '<leader>`' , function() vim.cmd('b #') end, mopts)
 
--- paste
 vim.keymap.set('x', '<leader>p', '"_dp', mopts)
 vim.keymap.set('x', '<leader>P', '"_dP', mopts)
 vim.keymap.set('x', '<leader>s', '"_ds', mopts)
 vim.keymap.set('x', '<leader>S', '"_dS', mopts)
+
+vim.keymap.set('n', '<leader>"', 'ciw""<Esc>P', mopts)
+vim.keymap.set('n', "<leader>'", "ciw''<Esc>P", mopts)
 
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')

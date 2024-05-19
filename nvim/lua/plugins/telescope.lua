@@ -1,7 +1,15 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim', 'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-args.nvim'},
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
+            },
+            'nvim-telescope/telescope-file-browser.nvim',
+            'nvim-telescope/telescope-live-grep-args.nvim',
+        },
         keys = {
             {'gi', function() require('telescope.builtin').lsp_implementations() end },
             {'gr', function() require('telescope.builtin').lsp_references() end },
@@ -40,6 +48,7 @@ return {
             {'\\g', function() require('telescope.builtin').git_bcommits() end },
             {'\\g', function() require('telescope.builtin').git_bcommits_range() end, mode='v' },
             { '<leader>F', ':Telescope file_browser path=%:p:h select_buffer=true<CR>' },
+            {'\\<Tab>', function() require('telescope.builtin').git_files({ git_command={ 'git', 'diff', '--name-only', 'main' } }) end },
             {
                 '\\\\',
                 function()
@@ -56,7 +65,6 @@ return {
         },
         config = function(_, opts)
             require('telescope').setup(opts)
-
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('live_grep_args')
             require('telescope').load_extension('file_browser')
@@ -130,8 +138,4 @@ return {
             },
         } end,
     },
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-    }
 }

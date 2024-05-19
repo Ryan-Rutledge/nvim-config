@@ -50,6 +50,7 @@ return {
                 map('n', '<leader>gu', gs.undo_stage_hunk)
                 map('n', '<leader>gw', gs.toggle_word_diff)
                 map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+                map({'o', 'x'}, 'ah', ':<C-U>Gitsigns select_hunk<CR>')
             end
         }
     },
