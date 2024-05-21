@@ -52,46 +52,25 @@ vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
-
 vim.opt.showtabline = 1
-vim.g.tabline = function()
-    local cur = vim.fn.tabpagenr()
-    local s = {'%='}
-
-    for i=1,vim.fn.tabpagenr('$') do
-        if i == cur then
-            table.insert(s, '%#TabLineSel#')
-        else
-            table.insert(s, '%#TabLine#')
-        end
-
-        table.insert(s, '%')
-        table.insert(s, i)
-        table.insert(s, 'T ')
-        table.insert(s, i)
-        table.insert(s, ' ')
-    end
-
-    table.insert(s, '%#TabLineFill#%T')
-
-    return table.concat(s, '')
-end
-vim.opt.tabline='%!g:tabline()'
 
 vim.g.macroStr = ''
-vim.api.nvim_create_autocmd({'RecordingEnter'}, {
-    callback = function()
-        vim.g.macroStr = '@' .. vim.fn.reg_recording()
-        vim.opt.statusline = vim.opt.statusline
-    end
+vim.api.nvim_create_autocmd('RecordingEnter', {
+    callback = function() vim.g.macroStr = '@' .. vim.fn.reg_recording() end
 })
-vim.api.nvim_create_autocmd({'RecordingLeave'}, {
-    callback = function()
-        vim.g.macroStr = ''
-        vim.opt.statusline = vim.opt.statusline
-    end
+vim.api.nvim_create_autocmd('RecordingLeave', {
+    callback = function() vim.g.macroStr = '' end
 })
-vim.opt.statusline = '%#TSRainbowBlue#%m%w%q%h%#TSRainbowViolet#%t%* %{expand("%:~:h")}%=%#TSRainbowOrange#%S%#TSRainbowRed#%{g:macroStr} %7(%#TSRainbowYellow#%l,%-3c%) %10(%#TSRainbowCyan#%b U+%04B%) %*%#TSRainbowGreen#%Y%*'
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = '#c0caf5', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = '#3b4261', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineFlags', { fg = '#7aa2f7', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineFileName', { fg = '#9d7cd8', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineShowCmd', { fg = '#ff9e64', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineRecording', { fg = '#f7768e', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLinePosition', { fg = '#e0af68', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineCharCode', { fg = '#7dcfff', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineFileType', { fg = '#93ce68', bg='#111111'})
+vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%#StatusLineFileName#%t%* %{expand("%:~:h")}%=%#StatusLineShowCmd#%S%#StatusLineRecording#%{g:macroStr} %7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %*%#StatusLineFileType#%Y%*'
 
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {

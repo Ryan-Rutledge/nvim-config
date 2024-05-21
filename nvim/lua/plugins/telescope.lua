@@ -18,7 +18,6 @@ return {
             {'\\%', function() require('telescope.builtin').current_buffer_fuzzy_find() end },
             {'\\*', function() require('telescope.builtin').grep_string() end },
             {'\\b', function() require('telescope.builtin').live_grep({ grep_open_files = true }) end },
-            {'\\T', function() require('telescope.builtin').treesitter() end },
             {'\\<BS>', function() require('telescope.builtin').resume() end },
             {'\\d', function() require('telescope.builtin').diagnostics() end },
             {'\\D', function() require('telescope.builtin').diagnostics({ root_dir = true }) end },
@@ -48,7 +47,7 @@ return {
             {'\\g', function() require('telescope.builtin').git_bcommits() end },
             {'\\g', function() require('telescope.builtin').git_bcommits_range() end, mode='v' },
             { '<leader>F', ':Telescope file_browser path=%:p:h select_buffer=true<CR>' },
-            {'\\<Tab>', function() require('telescope.builtin').git_files({ git_command={ 'git', 'diff', '--name-only', 'main' } }) end },
+            {'\\<Tab>', function() require('telescope.builtin').git_files({ git_command={ 'git', 'diff', '--name-only', 'main...' } }) end },
             {
                 '\\\\',
                 function()
