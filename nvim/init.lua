@@ -44,6 +44,8 @@ vim.opt.foldmethod = 'indent'
 vim.opt.foldnestmax = 1
 vim.opt.foldtext = ''
 vim.opt.foldenable = false
+vim.opt.list = true
+vim.opt.listchars = 'tab:-->,trail:,nbsp:█'
 vim.opt.mps:append({'<:>'})
 vim.opt.formatoptions:remove({'c', 'r', 'o'})
 
@@ -62,15 +64,16 @@ vim.api.nvim_create_autocmd('RecordingLeave', {
     callback = function() vim.g.macroStr = '' end
 })
 vim.api.nvim_set_hl(0, 'StatusLine', { fg = '#c0caf5', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = '#3b4261', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineFlags', { fg = '#7aa2f7', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = '#4c5372', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLineFlags', { fg = '#e0af68', bg='#111111'})
 vim.api.nvim_set_hl(0, 'StatusLineFileName', { fg = '#9d7cd8', bg='#111111'})
 vim.api.nvim_set_hl(0, 'StatusLineShowCmd', { fg = '#ff9e64', bg='#111111'})
 vim.api.nvim_set_hl(0, 'StatusLineRecording', { fg = '#f7768e', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLinePosition', { fg = '#e0af68', bg='#111111'})
+vim.api.nvim_set_hl(0, 'StatusLinePosition', { fg = '#7aa2f7', bg='#111111'})
 vim.api.nvim_set_hl(0, 'StatusLineCharCode', { fg = '#7dcfff', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineFileType', { fg = '#93ce68', bg='#111111'})
-vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%#StatusLineFileName#%t%* %{expand("%:~:h")}%=%#StatusLineShowCmd#%S%#StatusLineRecording#%{g:macroStr} %7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %*%#StatusLineFileType#%Y%*'
+vim.api.nvim_set_hl(0, 'StatusLineFileMeta', { fg = '#93ce68', bg='#111111'})
+vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%#StatusLineFileName#%t%* %{expand("%:~:h")}%=%#StatusLineShowCmd#%S%#StatusLineRecording#%{g:macroStr} %7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%*'
+vim.api.nvim_create_autocmd({'ModeChanged'}, { callback = function(_) vim.schedule(function() vim.cmd('redraw') end) end })  -- fixes statusline flash on mode change
 
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {

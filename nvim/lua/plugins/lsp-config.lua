@@ -37,16 +37,26 @@ return {
                 end
             })
 
+            SeveritySigns = {
+                [vim.diagnostic.severity.ERROR] = '󰏃',
+                [vim.diagnostic.severity.WARN] = '󰔶',
+                [vim.diagnostic.severity.HINT] = '󰌵',
+                [vim.diagnostic.severity.INFO] = '',
+            }
+
             vim.diagnostic.config({
-                virtual_text = false,
                 severity_sort = true,
+                signs = false,
                 float = { border = 'rounded', source = 'always' },
+                virtual_text = {
+                    prefix = function(diagnostic) return SeveritySigns[diagnostic.severity] end,
+                },
             })
 
-            vim.fn.sign_define('DiagnosticSignError', {icon='󰏃', text='󰏃', texthl='DiagnosticError'})
-            vim.fn.sign_define('DiagnosticSignWarn', {icon='󰔶', text='󰔶', texthl='DiagnosticWarn'})
-            vim.fn.sign_define('DiagnosticSignInfo', {icon='󰌵', text='󰌵', texthl='DiagnosticInfo'})
-            vim.fn.sign_define('DiagnosticSignHint', {icon='', text='', texthl='DiagnosticHint'})
+            vim.fn.sign_define('DiagnosticSignError', {text=SeveritySigns[vim.diagnostic.severity.ERROR], icon=SeveritySigns[vim.diagnostic.severity.ERROR]})
+            vim.fn.sign_define('DiagnosticSignWarn',  {text=SeveritySigns[vim.diagnostic.severity.WARN], icon=SeveritySigns[vim.diagnostic.severity.WARN]})
+            vim.fn.sign_define('DiagnosticSignInfo',  {text=SeveritySigns[vim.diagnostic.severity.HINT], icon=SeveritySigns[vim.diagnostic.severity.HINT]})
+            vim.fn.sign_define('DiagnosticSignHint',  {text=SeveritySigns[vim.diagnostic.severity.INFO], icon=SeveritySigns[vim.diagnostic.severity.INFO]})
         end
     },
     {
