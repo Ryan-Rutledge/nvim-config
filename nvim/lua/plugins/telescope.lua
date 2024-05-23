@@ -69,72 +69,71 @@ return {
             require('telescope').load_extension('file_browser')
             vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
         end,
-        opts = function() return {
-            theme = 'tokyonight',
-            defaults = {
-                prompt_prefix = '   ',
-                layout_strategy = 'horizontal',
-                -- layout_strategy = 'vertical',
-                mappings = {
-                    n = {
-                        ['<A-p>'] = require('telescope.actions.layout').toggle_preview,
-                        ['<C-q>'] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
-                    },
-                    i = {
-                        ['<A-p>'] = require('telescope.actions.layout').toggle_preview,
-                        ['<C-q>'] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
-                    },
-                },
-                path_display = {
-                    filename_first = { reverse_directories = true }
-                },
-                winblend = 0,
-                border = true,
-                color_devicons = true,
-                multi_icon = ' ',
-                selection_caret = '  ',
-                entry_prefix = '  ',
-                initial_mode = 'insert',
-                sorting_strategy = 'ascending',
-                show_line = false,
-                trim_text = true,
-            },
-            extensions = {
-                file_browser = {
-                    hide_parent_dir = true,
-                    follow_symlinks = true,
-                    prompt_path = true,
-                },
-                live_grep_args = {
+        opts = function()
+            local actions = require('telescope.actions')
+            local git_previewer = { require('telescope.previewers').git_commit_diff_as_was.new({}), }
+
+
+            return {
+                theme = 'tokyonight',
+                defaults = {
+                    prompt_prefix = '   ',
+                    layout_strategy = 'horizontal',
+                    -- layout_strategy = 'vertical',
                     mappings = {
-                        i = {
-                            ['<C-k>'] = require('telescope-live-grep-args.actions').quote_prompt(),
-                            ['<C-i>'] = require('telescope-live-grep-args.actions').quote_prompt({ postfix = ' --iglob ' }),
-                        },
-                    },
-                }
-            },
-            pickers = {
-                buffers = {
-                    mappings = {
-                        i = {
-                            ['<DEL>'] = require('telescope.actions').delete_buffer
-                        },
                         n = {
-                            ['d'] = require('telescope.actions').delete_buffer
-                        }
+                            ['<A-p>'] = require('telescope.actions.layout').toggle_preview,
+                            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                        },
+                        i = {
+                            ['<A-p>'] = require('telescope.actions.layout').toggle_preview,
+                            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                        },
+                    },
+                    path_display = {
+                        filename_first = { reverse_directories = true }
+                    },
+                    winblend = 0,
+                    border = true,
+                    color_devicons = true,
+                    multi_icon = ' ',
+                    selection_caret = '  ',
+                    entry_prefix = '  ',
+                    initial_mode = 'insert',
+                    sorting_strategy = 'ascending',
+                    show_line = false,
+                    trim_text = true,
+                },
+                extensions = {
+                    file_browser = {
+                        hide_parent_dir = true,
+                        follow_symlinks = true,
+                        prompt_path = true,
+                    },
+                    live_grep_args = {
+                        mappings = {
+                            i = {
+                                ['<C-k>'] = require('telescope-live-grep-args.actions').quote_prompt(),
+                                ['<C-i>'] = require('telescope-live-grep-args.actions').quote_prompt({ postfix = ' --iglob ' }),
+                            },
+                        },
                     }
                 },
-                live_grep = {
-                    disable_coordinates = true,
+                pickers = {
+                    buffers = {
+                        mappings = {
+                            i = { ['<DEL>'] = actions.delete_buffer },
+                            n = { ['d'] = actions.delete_buffer }
+                        }
+                    },
+                    live_grep = { disable_coordinates = true, },
+                    grep_string = { disable_coordinates = true, },
+                    treesitter = { show_line = false, },
+                    git_commits = { previewer = git_previewer },
+                    git_bcommits = { previewer = git_previewer },
+                    git_bcommits_range = { previewer = git_previewer },
                 },
-                grep_string = {
-                    disable_coordinates = true,
-                },
-                treesitter = {
-                    show_line = false,
-                },
-            },
-        } end,
+            }
+        end,
     },
 }
