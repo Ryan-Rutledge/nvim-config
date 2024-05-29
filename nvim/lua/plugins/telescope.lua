@@ -76,7 +76,6 @@ return {
             local actions = require('telescope.actions')
             local git_previewer = { require('telescope.previewers').git_commit_diff_as_was.new({}), }
 
-
             return {
                 theme = 'tokyonight',
                 defaults = {
@@ -125,8 +124,14 @@ return {
                 pickers = {
                     buffers = {
                         mappings = {
-                            i = { ['<DEL>'] = actions.delete_buffer },
-                            n = { ['d'] = actions.delete_buffer }
+                            i = {
+                                    ['<CR>'] = actions.select_drop,
+                                    ['<DEL>'] = actions.delete_buffer,
+                                },
+                            n = {
+                                    ['<CR>'] = actions.select_drop,
+                                    ['d'] = actions.delete_buffer,
+                                },
                         }
                     },
                     live_grep = { disable_coordinates = true, },
