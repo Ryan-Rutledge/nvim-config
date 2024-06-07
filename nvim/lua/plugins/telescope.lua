@@ -22,18 +22,12 @@ return {
                 {'\\b', function() builtin.live_grep({ grep_open_files = true }) end },
                 {'\\<BS>', builtin.resume},
                 {'\\d', builtin.diagnostics},
-                {'\\D', function() builtin.diagnostics({ root_dir = true }) end },
                 {'\\a', builtin.lsp_document_symbols},
-                {'\\A', builtin.lsp_workspace_symbols},
                 {'\\v', function() builtin.lsp_document_symbols({symbols = {'variable', 'field', 'parameter', 'constant'}}) end },
-                {'\\V', function() builtin.lsp_workspace_symbols({symbols = {'variable', 'field', 'parameter', 'constant'}}) end },
-                {'\\l', function() builtin.lsp_document_symbols({symbols = {'object', 'string', 'character', 'float', 'number', 'boolean'}}) end },
-                {'\\L', function() builtin.lsp_workspace_symbols({symbols = {'object', 'string', 'character', 'float', 'number', 'boolean'}}) end },
                 {'\\c', function() builtin.lsp_document_symbols({symbols = 'class'}) end },
-                {'\\C', function() builtin.lsp_workspace_symbols({symbols = 'class'}) end },
                 {'\\f', function() builtin.lsp_document_symbols({symbols = {'function', 'method', 'constructor', 'property'}}) end },
-                {'\\F', function() builtin.lsp_workspace_symbols({symbols = {'function', 'method', 'constructor', 'property'}}) end },
                 {'\\q', builtin.quickfix},
+                {'\\l', builtin.loclist},
                 {'<leader><Tab>', builtin.buffers},
                 {'<leader>\\?', builtin.search_history},
                 {'<leader>\\r', builtin.registers},
@@ -74,22 +68,25 @@ return {
         end,
         opts = function()
             local actions = require('telescope.actions')
-            local git_previewer = { require('telescope.previewers').git_commit_diff_as_was.new({}), }
+            local layout = require('telescope.actions.layout')
 
             return {
                 theme = 'tokyonight',
                 defaults = {
                     prompt_prefix = '   ',
                     layout_strategy = 'horizontal',
-                    -- layout_strategy = 'vertical',
                     mappings = {
                         n = {
-                            ['<A-p>'] = require('telescope.actions.layout').toggle_preview,
+                            ['<A-p>'] = layout.toggle_preview,
                             ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                            ['<C-l>'] = actions.smart_send_to_loclist + actions.open_loclist,
                         },
                         i = {
-                            ['<A-p>'] = require('telescope.actions.layout').toggle_preview,
+                            ['<A-p>'] = layout.toggle_preview,
+                            ['<A-k>'] = actions.cycle_previewers_prev,
+                            ['<A-j>'] = actions.cycle_previewers_next,
                             ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                            ['<C-l>'] = actions.smart_send_to_loclist + actions.open_loclist,
                         },
                     },
                     path_display = {
@@ -122,24 +119,21 @@ return {
                     }
                 },
                 pickers = {
+                    git_files = {
+                        mappings = {
+                            i = { ['<CR>'] = actions.select_drop, },
+                            n = { ['<CR>'] = actions.select_drop, },
+                        }
+                    },
                     buffers = {
                         mappings = {
-                            i = {
-                                    ['<CR>'] = actions.select_drop,
-                                    ['<DEL>'] = actions.delete_buffer,
-                                },
-                            n = {
-                                    ['<CR>'] = actions.select_drop,
-                                    ['d'] = actions.delete_buffer,
-                                },
+                            i = { ['<CR>'] = actions.select_drop, ['<DEL>'] = actions.delete_buffer, },
+                            n = { ['<CR>'] = actions.select_drop, ['d'] = actions.delete_buffer, },
                         }
                     },
                     live_grep = { disable_coordinates = true, },
                     grep_string = { disable_coordinates = true, },
                     treesitter = { show_line = false, },
-                    git_commits = { previewer = git_previewer },
-                    git_bcommits = { previewer = git_previewer },
-                    git_bcommits_range = { previewer = git_previewer },
                 },
             }
         end,

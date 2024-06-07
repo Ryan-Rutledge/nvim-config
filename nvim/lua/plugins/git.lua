@@ -35,8 +35,8 @@ return {
                     if vim.wo.diff then return '[c' end vim.schedule(function() gs.prev_hunk() end)
                     return '<Ignore>'
                 end, {expr=true})
+                map('n', '<leader>gg', gs.toggle_signs)
                 map('n', '<leader>gb', function() gs.blame_line{full=true} end)
-                map('n', '<leader>gB', gs.toggle_current_line_blame)
                 map('n', '<leader>gd', gs.diffthis)
                 map('n', '<leader>gD', function() gs.diffthis(vim.cmd("~")) end)
                 map('n', '<leader>gp', gs.preview_hunk_inline)
@@ -49,8 +49,8 @@ return {
                 map('n', '<leader>gS', gs.stage_buffer)
                 map('n', '<leader>gu', gs.undo_stage_hunk)
                 map('n', '<leader>gw', gs.toggle_word_diff)
-                map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-                map({'o', 'x'}, 'ah', ':<C-U>Gitsigns select_hunk<CR>')
+                map({'o', 'x'}, 'ic', ':<C-U>Gitsigns select_hunk<CR>')
+                map({'o', 'x'}, 'ac', ':<C-U>Gitsigns select_hunk<CR>')
             end
         }
     },

@@ -48,8 +48,10 @@ vim.opt.list = true
 vim.opt.listchars = 'tab:-->,trail:,nbsp:█'
 vim.opt.mps:append({'<:>'})
 vim.opt.formatoptions:remove({'c', 'r', 'o'})
+vim.opt.signcolumn = 'auto:3'
 
 vim.opt.guifont='FiraCode Nerd Font'
+vim.opt.numberwidth = 2
 vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.cursorline = true
@@ -113,7 +115,9 @@ vim.keymap.set('n', '<leader>l', function() vim.opt.number = not vim.opt.number:
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', mopts)
 vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
 vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', mopts)
-vim.keymap.set('n', '<leader>q', ':helpclose<CR>', mopts)
+vim.keymap.set('n', '<BS><F1>', ':helpclose<CR>', mopts)
+vim.keymap.set('n', '<BS>q', ':cclose<CR>', mopts)
+vim.keymap.set('n', '<BS>l', ':lclose<CR>', mopts)
 
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', mopts)
