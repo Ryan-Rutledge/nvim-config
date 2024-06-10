@@ -11,13 +11,18 @@ return {
             local lspconfig = require('lspconfig')
 
             require('mason-lspconfig').setup({
-                ensure_installed = {},
+                ensure_installed = {
+                    'clangd',
+                    'emmet_ls',
+                    'lua_ls',
+                    'pyright',
+                    'tailwindcss',
+                    'tsserver',
+                },
                 handlers = {
                     function(server)
                         lspconfig[server].setup({ capabilities = lsp_capabilities })
                     end,
-                    lua_ls = function() lspconfig.lua_ls.setup({}) end,
-                    pylsp = function() lspconfig.pylsp.setup({}) end,
                 },
             })
 

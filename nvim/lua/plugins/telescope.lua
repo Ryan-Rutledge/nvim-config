@@ -37,13 +37,14 @@ return {
                 {'<leader>\\h', builtin.highlights},
                 {'<leader>\\k', builtin.keymaps},
                 {'\\m', builtin.man_pages},
-                {'<C-p>', function() builtin.git_files({ show_untracked = true }) end },
+                {'<C-p>', function() builtin.git_files({ use_file_path = true, show_untracked = true }) end },
                 {'\\G', builtin.git_commits},
                 {'\\B', builtin.git_branches},
                 {'\\g', builtin.git_bcommits},
                 {'\\g', mode='v', builtin.git_bcommits_range},
                 { '<leader>F', ':Telescope file_browser path=%:p:h select_buffer=true<CR>' },
                 {'\\<Tab>', function() builtin.git_files({ git_command={ 'git', 'diff', '--name-only', 'main...' } }) end },
+                {'\\<S-Tab>', function() builtin.git_files({ git_command={ 'git', 'diff', '--name-only', 'master...' } }) end },
                 {
                     '\\\\',
                     function()
@@ -61,9 +62,6 @@ return {
         end,
         config = function(_, opts)
             require('telescope').setup(opts)
-            require('telescope').load_extension('fzf')
-            require('telescope').load_extension('live_grep_args')
-            require('telescope').load_extension('file_browser')
             vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
         end,
         opts = function()
