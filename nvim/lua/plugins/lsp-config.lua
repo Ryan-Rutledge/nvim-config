@@ -13,11 +13,12 @@ return {
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     'clangd',
-                    'emmet_ls',
+                    -- 'emmet_ls',
                     'lua_ls',
-                    'pyright',
-                    'tailwindcss',
-                    'tsserver',
+                    -- 'pyright',
+                    -- 'rust_analyzer',
+                    -- 'tailwindcss',
+                    -- 'tsserver',
                 },
                 handlers = {
                     function(server)

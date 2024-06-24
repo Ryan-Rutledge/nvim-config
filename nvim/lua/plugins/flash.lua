@@ -9,7 +9,7 @@ return {
             matches = false,
         },
         modes = {
-            char = { highlight = { backdrop = false }},
+            char = { enabled = false, highlight = { backdrop = false }},
             search = {
                 enabled = false,
                 jump = { nohlsearch = false },
