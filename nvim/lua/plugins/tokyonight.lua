@@ -1,42 +1,30 @@
-return {
-    'folke/tokyonight.nvim',
-    priority = 1000,
-    lazy = false,
-    config = function()
-        require('tokyonight').setup({
-            style = 'night',
-            styles = {
-                functions = { italic = false },
-                keywords = { italic = false },
-                sidebars = 'dark'
-            },
-            sidebars = { 'qf', 'help', 'fugitive', 'netrw', 'Outline', 'Telescope',},
-            lualine_bold = true,
-            on_highlights = function(highlights, colors)
-                highlights.Comment = { fg = '#EEEEEE', italic = false }
+require('tokyonight').setup({
+    style = 'night',
+    styles = {
+        functions = { italic = false },
+        keywords = { italic = false },
+        sidebars = 'dark'
+    },
+    sidebars = { 'qf', 'help', 'fugitive', 'netrw', 'Outline', 'Telescope',},
+    on_highlights = function(highlights, colors)
+        highlights.Comment = { fg = '#EEEEEE' }
+        highlights.LineNr = { fg = colors.dark5 }
+        highlights.DiagnosticUnnecessary = { fg = colors.dark5 }
+        highlights.YankFlash = { fg = colors.black, bg = colors.blue }
 
-                local tele_bg = colors.bg_dark
-                highlights.TelescopeBorder = { fg = tele_bg, bg = tele_bg}
-                highlights.TelescopePromptBorder = { fg = tele_bg, bg = tele_bg }
+        highlights.StatusLine = { fg = '#c0caf5', bg = colors.black}
+        highlights.StatusLineNC = { fg = '#4c5372', bg = colors.black}
+        highlights.StatusLineFlags = { fg = '#e0af68', bg = colors.black}
+        highlights.StatusLineFileName = { fg = '#9d7cd8', bg = colors.black}
+        highlights.StatusLineShowCmd = { fg = '#ff9e64', bg = colors.black}
+        highlights.StatusLineRecording = { fg = '#f7768e', bg = colors.black}
+        highlights.StatusLinePosition = { fg = '#7aa2f7', bg = colors.black}
+        highlights.StatusLineCharCode = { fg = '#7dcfff', bg = colors.black}
+        highlights.StatusLineFileMeta = { fg = '#93ce68', bg = colors.black}
+    end,
+})
 
-                local vis_bg = require('tokyonight.util').blend(colors.purple, colors.black, 0.3)
-                highlights.Visual = { bg = vis_bg }
-                highlights.CursorLineNr = { fg = colors.dark5 }
-                highlights.CursorLineNr = { fg = colors.magenta, bg = colors.bg_highlight }
-                highlights.IncSearch = { fg = colors.black, bg = colors.magenta }
-                highlights.Search = { fg = colors.black, bg = colors.yellow }
-                highlights.DiagnosticUnnecessary = { fg = colors.dark5 }
-                highlights.StatusLine = { fg = colors.fg, bg = colors.bg }
-            end,
-        })
-
-        -- flash yanked text
-        vim.api.nvim_create_autocmd({'TextYankPost'}, {
-            callback = function(_)
-                vim.highlight.on_yank({higroup='YankyYanked', timeout=180})
-                end
-        })
-
-        vim.cmd[[colorscheme tokyonight]]
-    end
-}
+-- flash yanked text
+vim.api.nvim_create_autocmd({'TextYankPost'}, {
+    callback = function(_) vim.highlight.on_yank({higroup='YankFlash', timeout=200}) end
+})

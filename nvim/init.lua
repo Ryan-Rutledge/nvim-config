@@ -1,22 +1,34 @@
-vim.loader.enable()
+local rocks_config = {
+    rocks_path = vim.env.HOME .. "/.local/share/nvim/rocks",
+}
+
+vim.g.rocks_nvim = rocks_config
+
+local luarocks_path = {
+    vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?.lua"),
+    vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?", "init.lua"),
+}
+package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
+
+local luarocks_cpath = {
+    vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.so"),
+    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.so"),
+    -- Remove the dylib and dll paths if you do not need macos or windows support
+    vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.dylib"),
+    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.dylib"),
+    vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.dll"),
+    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.dll"),
+}
+package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
+
+vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "*", "*"))
+
+require('rocks-config').configure('tokyonight')
+
 vim.g.mapleader = ' '
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-require('lazy').setup('plugins')
-
+vim.cmd[[colorscheme tokyonight]]
 vim.opt.cmdheight = 0
--- vim.opt.laststatus = 3
+vim.opt.laststatus = 3
 vim.opt.showcmdloc = 'statusline'
 vim.opt.showcmd = true
 vim.opt.linebreak = true
@@ -59,21 +71,8 @@ vim.opt.cursorcolumn = true
 vim.opt.showtabline = 1
 
 vim.g.macroStr = ''
-vim.api.nvim_create_autocmd('RecordingEnter', {
-    callback = function() vim.g.macroStr = '@' .. vim.fn.reg_recording() end
-})
-vim.api.nvim_create_autocmd('RecordingLeave', {
-    callback = function() vim.g.macroStr = '' end
-})
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = '#c0caf5', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = '#4c5372', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineFlags', { fg = '#e0af68', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineFileName', { fg = '#9d7cd8', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineShowCmd', { fg = '#ff9e64', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineRecording', { fg = '#f7768e', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLinePosition', { fg = '#7aa2f7', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineCharCode', { fg = '#7dcfff', bg='#111111'})
-vim.api.nvim_set_hl(0, 'StatusLineFileMeta', { fg = '#93ce68', bg='#111111'})
+vim.api.nvim_create_autocmd('RecordingEnter', { callback = function() vim.g.macroStr = '@' .. vim.fn.reg_recording() end })
+vim.api.nvim_create_autocmd('RecordingLeave', { callback = function() vim.g.macroStr = '' end })
 vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%#StatusLineFileName#%t%* %{expand("%:~:h")}%=%#StatusLineShowCmd#%S%#StatusLineRecording#%{g:macroStr} %7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%*'
 vim.api.nvim_create_autocmd({'ModeChanged'}, { callback = function(_) vim.schedule(function() vim.cmd('redraw') end) end })  -- fixes statusline flash on mode change
 
@@ -96,16 +95,7 @@ vim.api.nvim_create_autocmd({'TermClose'}, {
     callback = function(_) _TermChannel = nil end
 })
 
-vim.api.nvim_create_autocmd({'FileType'}, {
-    pattern = 'help',
-    callback = function(_)
-        vim.opt.number = true
-        vim.opt_local.relativenumber = false
-    end
-})
-
 local mopts = { silent = true, noremap = true }
-
 vim.keymap.set('n', 'U', '<C-r>', mopts)
 vim.keymap.set('n', 'Y', 'y$', mopts)
 vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { silent = true })
@@ -153,11 +143,3 @@ vim.keymap.set('t', '<M-f>', function()
     vim.fn.chansend(vim.o.channel, ' cd ' .. vim.fn.expand("#:p:h") .. '\n')
 end, mopts)
 
-vim.api.nvim_create_autocmd({'FileType'}, {
-    pattern = 'c,cpp',
-    callback = function(_)
-        vim.opt.shiftwidth = 2
-        vim.opt.softtabstop = 2
-        vim.opt.tabstop = 2
-    end
-})

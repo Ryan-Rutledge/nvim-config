@@ -1,7 +1,6 @@
-return {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {
+local flash = require('flash')
+
+flash.setup({
         label = { uppercase = false },
         highlight = {
             backdrop = false,
@@ -18,9 +17,9 @@ return {
                 label = { style = 'overlay' },
             }
         },
-    },
-    keys = {
-        { '<A-/>', mode = { 'n', 'v' }, function() require('flash').jump() end, desc = 'Flash' },
-        { '<A-/>', mode = { 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
-    },
-}
+    }
+)
+
+local mopts = { silent = true, noremap = true }
+vim.keymap.set({ 'n', 'v' }, '<A-/>', flash.jump, mopts)
+vim.keymap.set({ 'x', 'o' }, '<A-S-/>', flash.treesitter, mopts)
