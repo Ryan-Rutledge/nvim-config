@@ -43,7 +43,8 @@ return {
                 {'\\g', builtin.git_bcommits},
                 {'\\g', mode='v', builtin.git_bcommits_range},
                 { '<leader>F', ':Telescope file_browser path=%:p:h select_buffer=true<CR>' },
-                {'\\<Tab>', function() builtin.git_files({ git_command={ 'git', 'diff', '--name-only', 'main...' } }) end },
+                {'\\<Tab>', function() builtin.git_files({ git_command={ 'git', 'diff', '--name-only', '--merge-base main' } }) end },
+                {'\\<S-Tab>', function() builtin.git_files({ git_command={ 'git', 'diff', '--name-only', '--merge-base master' } }) end },
                 {
                     '\\\\',
                     function()
