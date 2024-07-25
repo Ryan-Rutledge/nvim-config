@@ -30,7 +30,7 @@ return {
                     enable = true,
                     set_jumps = true,
                     goto_next_start = {
-                        ["<C-j>"] = "@function.inner",
+                        ["<C-j>"] = "@function.outer",
                         ["]m"] = "@function.outer",
                         ["]]"] = "@class.outer",
                         ["]/"] = "@comment",
@@ -40,7 +40,7 @@ return {
                         ["]["] = "@class.outer",
                     },
                     goto_previous_start = {
-                        ["<C-k>"] = "@function.inner",
+                        ["<C-k>"] = "@function.outer",
                         ["[m"] = "@function.outer",
                         ["[["] = "@class.outer",
                         ["[/"] = "@comment",

@@ -152,3 +152,12 @@ vim.keymap.set('t', '<C-\\>', '<C-\\><C-N>:b #<CR>', mopts)
 vim.keymap.set('t', '<M-f>', function()
     vim.fn.chansend(vim.o.channel, ' cd ' .. vim.fn.expand("#:p:h") .. '\n')
 end, mopts)
+
+vim.api.nvim_create_autocmd({'FileType'}, {
+    pattern = 'c,cpp',
+    callback = function(_)
+        vim.opt.shiftwidth = 2
+        vim.opt.softtabstop = 2
+        vim.opt.tabstop = 2
+    end
+})

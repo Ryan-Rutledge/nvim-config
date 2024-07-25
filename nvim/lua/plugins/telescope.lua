@@ -23,9 +23,10 @@ return {
                 {'\\<BS>', builtin.resume},
                 {'\\d', builtin.diagnostics},
                 {'\\a', builtin.lsp_document_symbols},
-                {'\\v', function() builtin.lsp_document_symbols({symbols = {'variable', 'field', 'parameter', 'constant'}}) end },
+                {'\\n', function() builtin.lsp_document_symbols({symbols = {'namespace'}}) end },
                 {'\\c', function() builtin.lsp_document_symbols({symbols = 'class'}) end },
                 {'\\f', function() builtin.lsp_document_symbols({symbols = {'function', 'method', 'constructor', 'property'}}) end },
+                {'\\v', function() builtin.lsp_document_symbols({symbols = {'variable', 'field', 'parameter', 'constant'}}) end },
                 {'\\q', builtin.quickfix},
                 {'\\l', builtin.loclist},
                 {'<leader><Tab>', builtin.buffers},
@@ -37,12 +38,18 @@ return {
                 {'<leader>\\h', builtin.highlights},
                 {'<leader>\\k', builtin.keymaps},
                 {'\\m', builtin.man_pages},
-                {'<C-p>', function() builtin.git_files({ show_untracked = true }) end },
+                {'<C-p>', function() builtin.git_files({ use_file_path = true, show_untracked = true }) end },
                 {'\\G', builtin.git_commits},
                 {'\\B', builtin.git_branches},
                 {'\\g', builtin.git_bcommits},
                 {'\\g', mode='v', builtin.git_bcommits_range},
-                { '<leader>F', ':Telescope file_browser path=%:p:h select_buffer=true<CR>' },
+                {'<leader>f', builtin.find_files },
+                {'<leader>F', function() require('telescope').extensions.file_browser.file_browser({
+                    path = '%:p:h',
+                    select_buffer = true,
+                    hidden = true,
+                    follow_symlinks = true,
+                }) end },
                 {'\\<Tab>', function() builtin.git_files({ git_command={ 'git', 'diff', '--name-only', '--merge-base main' } }) end },
                 {'\\<S-Tab>', function() builtin.git_files({ git_command={ 'git', 'diff', '--name-only', '--merge-base master' } }) end },
                 {
@@ -62,9 +69,6 @@ return {
         end,
         config = function(_, opts)
             require('telescope').setup(opts)
-            require('telescope').load_extension('fzf')
-            require('telescope').load_extension('live_grep_args')
-            require('telescope').load_extension('file_browser')
             vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
         end,
         opts = function()

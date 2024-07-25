@@ -1,7 +1,8 @@
 return {
     'preservim/nerdcommenter',
     keys = {
-        { '<C-_>', ':call nerdcommenter#Comment(1, "toggle")<CR>', mode={ 'n', 'v' } }
+        { '<C-/>', ':call nerdcommenter#Comment(1, "toggle")<CR>', mode={ 'n', 'v' } },
+        { '<C-_>', ':call nerdcommenter#Comment(1, "toggle")<CR>', mode={ 'n', 'v' } }, -- Underscore sometimes represents / in some terminals
     },
     config = function()
         vim.g.NERDCreateCustomMappings = 0
