@@ -39,6 +39,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 require('lspconfig').pyright.setup({})
 require('lspconfig').pylsp.setup({})
+require('lspconfig').bashls.setup({})
 
 local cmp = require('cmp')
 cmp.setup({

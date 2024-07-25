@@ -12,8 +12,7 @@ package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
 
 local luarocks_cpath = {
     vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.so"),
-    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.so"),
-    -- Remove the dylib and dll paths if you do not need macos or windows support
+    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.so"), -- Remove the dylib and dll paths if you do not need macos or windows support
     vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.dylib"),
     vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.dylib"),
     vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.dll"),
@@ -28,7 +27,7 @@ require('rocks-config').configure('tokyonight')
 vim.g.mapleader = ' '
 vim.cmd[[colorscheme tokyonight]]
 vim.opt.cmdheight = 0
-vim.opt.laststatus = 3
+-- vim.opt.laststatus = 3
 vim.opt.showcmdloc = 'statusline'
 vim.opt.showcmd = true
 vim.opt.linebreak = true
@@ -71,10 +70,11 @@ vim.opt.cursorcolumn = true
 vim.opt.showtabline = 1
 
 vim.g.macroStr = ''
+vim.api.nvim_create_autocmd({'ModeChanged'}, { callback = function(_) vim.schedule(function() vim.cmd('redraw') end) end })  -- fixes statusline flash on mode change
 vim.api.nvim_create_autocmd('RecordingEnter', { callback = function() vim.g.macroStr = '@' .. vim.fn.reg_recording() end })
 vim.api.nvim_create_autocmd('RecordingLeave', { callback = function() vim.g.macroStr = '' end })
-vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%#StatusLineFileName#%t%* %{expand("%:~:h")}%=%#StatusLineShowCmd#%S%#StatusLineRecording#%{g:macroStr} %7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%*'
-vim.api.nvim_create_autocmd({'ModeChanged'}, { callback = function(_) vim.schedule(function() vim.cmd('redraw') end) end })  -- fixes statusline flash on mode change
+vim.api.nvim_create_autocmd('FileType', { pattern = 'help', callback = function() vim.opt_local.statusline = '%t%=%y' end })
+vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%*%t%#StatusLineFilePath# %{expand("%:~:h")}%=%#StatusLineShowCmd#%S%#StatusLineRecording#%{g:macroStr} %7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%* %Y'
 
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {

@@ -6,21 +6,23 @@ require('tokyonight').setup({
         sidebars = 'dark'
     },
     sidebars = { 'qf', 'help', 'fugitive', 'netrw', 'Outline', 'Telescope',},
+    on_colors = function(colors)
+        colors.comment = '#eeeeee'
+    end,
     on_highlights = function(highlights, colors)
-        highlights.Comment = { fg = '#EEEEEE' }
         highlights.LineNr = { fg = colors.dark5 }
         highlights.DiagnosticUnnecessary = { fg = colors.dark5 }
         highlights.YankFlash = { fg = colors.black, bg = colors.blue }
 
-        highlights.StatusLine = { fg = '#c0caf5', bg = colors.black}
-        highlights.StatusLineNC = { fg = '#4c5372', bg = colors.black}
-        highlights.StatusLineFlags = { fg = '#e0af68', bg = colors.black}
-        highlights.StatusLineFileName = { fg = '#9d7cd8', bg = colors.black}
-        highlights.StatusLineShowCmd = { fg = '#ff9e64', bg = colors.black}
-        highlights.StatusLineRecording = { fg = '#f7768e', bg = colors.black}
-        highlights.StatusLinePosition = { fg = '#7aa2f7', bg = colors.black}
-        highlights.StatusLineCharCode = { fg = '#7dcfff', bg = colors.black}
-        highlights.StatusLineFileMeta = { fg = '#93ce68', bg = colors.black}
+        highlights.StatusLineNC = { fg = colors.dark5, bg = colors.bg_statusline}
+        highlights.StatusLineFlags = { fg = colors.orange, bg = colors.bg_statusline}
+        highlights.StatusLineFlagsNC = { fg = colors.black, bg = colors.bg_statusline}
+        highlights.StatusLineFilePath = { fg = colors.dark5, bg = colors.bg_statusline}
+        highlights.StatusLineShowCmd = { fg = colors.purple, bg = colors.bg_statusline}
+        highlights.StatusLineRecording = { fg = colors.red, bg = colors.bg_statusline}
+        highlights.StatusLinePosition = { fg = colors.blue, bg = colors.bg_statusline}
+        highlights.StatusLineCharCode = { fg = colors.cyan, bg = colors.bg_statusline}
+        highlights.StatusLineFileMeta = { fg = colors.green, bg = colors.bg_statusline}
     end,
 })
 
