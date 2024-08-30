@@ -84,23 +84,14 @@ require('lsp_signature').setup({
     hint_enable = false,
 })
 
-SeveritySigns = {
-    [vim.diagnostic.severity.ERROR] = '󰏃',
-    [vim.diagnostic.severity.WARN] = '󰔶',
-    [vim.diagnostic.severity.HINT] = '󰌵',
-    [vim.diagnostic.severity.INFO] = '',
-}
-
 vim.diagnostic.config({
     severity_sort = true,
-    signs = false,
+    signs = true,
     float = { border = 'rounded', source = 'always' },
-    virtual_text = {
-        prefix = function(diagnostic) return SeveritySigns[diagnostic.severity] end,
-    },
+    virtual_text = false,
 })
 
-vim.fn.sign_define('DiagnosticSignError', {text=SeveritySigns[vim.diagnostic.severity.ERROR], icon=SeveritySigns[vim.diagnostic.severity.ERROR]})
-vim.fn.sign_define('DiagnosticSignWarn',  {text=SeveritySigns[vim.diagnostic.severity.WARN], icon=SeveritySigns[vim.diagnostic.severity.WARN]})
-vim.fn.sign_define('DiagnosticSignInfo',  {text=SeveritySigns[vim.diagnostic.severity.HINT], icon=SeveritySigns[vim.diagnostic.severity.HINT]})
-vim.fn.sign_define('DiagnosticSignHint',  {text=SeveritySigns[vim.diagnostic.severity.INFO], icon=SeveritySigns[vim.diagnostic.severity.INFO]})
+vim.fn.sign_define('DiagnosticSignError', {icon='󰏃'})
+vim.fn.sign_define('DiagnosticSignWarn',  {icon='󰔶'})
+vim.fn.sign_define('DiagnosticSignInfo',  {icon='󰌵'})
+vim.fn.sign_define('DiagnosticSignHint',  {icon=''})
