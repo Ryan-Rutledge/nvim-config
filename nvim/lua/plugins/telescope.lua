@@ -27,7 +27,6 @@ telescope.setup({
         },
         winblend = 0,
         border = true,
-        color_devicons = true,
         multi_icon = ' ',
         selection_caret = '  ',
         entry_prefix = '  ',
@@ -41,6 +40,7 @@ telescope.setup({
             hide_parent_dir = true,
             follow_symlinks = true,
             prompt_path = true,
+            hijack_netrw = true, 
         },
         live_grep_args = {
             mappings = {
@@ -82,6 +82,7 @@ vim.keymap.set('n', 'z=', builtin.spell_suggest, mopts)
 vim.keymap.set('n', '\\%', builtin.current_buffer_fuzzy_find, mopts)
 vim.keymap.set('n', '\\*', builtin.grep_string, mopts)
 vim.keymap.set('n', '\\b', function() builtin.live_grep({ grep_open_files = true }) end, mopts)
+vim.keymap.set('n', '\\/', function() telescope.extensions.live_grep_args.live_grep_args({ search_dirs = { vim.fn.expand('%:h') } }) end, mopts)
 vim.keymap.set('n', '\\<BS>', builtin.resume, mopts)
 vim.keymap.set('n', '\\d', builtin.diagnostics, mopts)
 vim.keymap.set('n', '\\a', builtin.lsp_document_symbols, mopts)

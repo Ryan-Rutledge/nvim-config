@@ -22,8 +22,6 @@ package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
 
 vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "*", "*"))
 
-require('rocks-config').configure('tokyonight')
-
 vim.g.mapleader = ' '
 vim.cmd[[colorscheme tokyonight]]
 vim.opt.cmdheight = 0
@@ -69,12 +67,13 @@ vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 vim.opt.showtabline = 1
 
-vim.g.macroStr = ''
+vim.g._macro_str = ''
 vim.api.nvim_create_autocmd({'ModeChanged'}, { callback = function(_) vim.schedule(function() vim.cmd('redraw') end) end })  -- fixes statusline flash on mode change
-vim.api.nvim_create_autocmd('RecordingEnter', { callback = function() vim.g.macroStr = '@' .. vim.fn.reg_recording() end })
-vim.api.nvim_create_autocmd('RecordingLeave', { callback = function() vim.g.macroStr = '' end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'help', callback = function() vim.opt_local.statusline = '%t%=%y' end })
-vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%*%t%#StatusLineFilePath# %{expand("%:~:h")}%=%#StatusLineShowCmd#%S%#StatusLineRecording#%{g:macroStr} %7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%* %Y'
+vim.api.nvim_create_autocmd('RecordingEnter', { callback = function() vim.g._macro_str = '@' .. vim.fn.reg_recording() end })
+vim.api.nvim_create_autocmd('RecordingLeave', { callback = function() vim.g._macro_str = '' end })
+vim.api.nvim_create_autocmd('FileType', { pattern = 'help', callback = function() vim.opt_local.statusline = '%t%#StatusLineDither#%{(v:hlsearch?_search_progress():" ")}%=%y' end })
+function vim.g._search_progress() if vim.fn.searchcount().current > 0 then return string.format(' [%d/%d] ', vim.fn.searchcount().current, vim.fn.searchcount().total) else return "" end end
+vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%*%t%#StatusLineDither#%{(v:hlsearch?_search_progress():" ")}%#StatusLineRecording#%{g:_macro_str}%#StatusLineShowCmd#%S%=%7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%* %Y'
 
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {
@@ -96,7 +95,6 @@ vim.api.nvim_create_autocmd({'TermClose'}, {
 })
 
 local mopts = { silent = true, noremap = true }
-vim.keymap.set('n', 'U', '<C-r>', mopts)
 vim.keymap.set('n', 'Y', 'y$', mopts)
 vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { silent = true })
 vim.keymap.set('n', '<leader>L', function() vim.opt.relativenumber = not vim.opt.relativenumber:get() end, mopts)
@@ -104,23 +102,10 @@ vim.keymap.set('n', '<leader>l', function() vim.opt.number = not vim.opt.number:
 
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', mopts)
 vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
-vim.keymap.set('n', '<leader>%', ':call setreg("+", expand("%:p:h"))<CR>', mopts)
-vim.keymap.set('n', '<BS><F1>', ':helpclose<CR>', mopts)
-vim.keymap.set('n', '<BS>q', ':cclose<CR>', mopts)
-vim.keymap.set('n', '<BS>l', ':lclose<CR>', mopts)
 
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', mopts)
-vim.keymap.set('n', '<leader>-' , ':bp|bd #<CR>', mopts)
 vim.keymap.set('n', '<leader>`' , function() vim.cmd('b #') end, mopts)
-
-vim.keymap.set('x', '<leader>p', '"_dp', mopts)
-vim.keymap.set('x', '<leader>P', '"_dP', mopts)
-vim.keymap.set('x', '<leader>s', '"_ds', mopts)
-vim.keymap.set('x', '<leader>S', '"_dS', mopts)
-
-vim.keymap.set('n', '<leader>"', 'ciw""<Esc>P', mopts)
-vim.keymap.set('n', "<leader>'", "ciw''<Esc>P", mopts)
 
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')

@@ -8,7 +8,17 @@ flash.setup({
             matches = false,
         },
         modes = {
-            char = { enabled = false, highlight = { backdrop = false }},
+            char = {
+                enabled = true,
+                highlight = { backdrop = false },
+                multi_line = false,
+                char_actions = function(motion)
+                    return {
+                        [";"] = "right",
+                        [","] = "left",
+                    }
+                end,
+            },
             search = {
                 enabled = false,
                 jump = { nohlsearch = false },

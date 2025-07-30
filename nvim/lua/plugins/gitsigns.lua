@@ -1,4 +1,5 @@
 require('gitsigns').setup({
+    sign_priority = 1002,
     current_line_blame = false,
     attach_to_untracked = true,
     on_attach = function(bufnr)

@@ -37,10 +37,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-require('lspconfig').pyright.setup({})
-require('lspconfig').pylsp.setup({})
-require('lspconfig').bashls.setup({})
-
 local cmp = require('cmp')
 cmp.setup({
     sources = cmp.config.sources(
@@ -78,20 +74,23 @@ cmp.setup({
     },
 })
 
-require('lsp_signature').setup({
-    bind = true,
-    hi_parameter = 'BufferCurrentTarget',
-    hint_enable = false,
-})
+-- require('lsp_signature').setup({
+--     bind = true,
+--     hi_parameter = 'BufferCurrentTarget',
+--     hint_enable = false,
+-- })
 
 vim.diagnostic.config({
     severity_sort = true,
     signs = true,
     float = { border = 'rounded', source = 'always' },
     virtual_text = false,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "✘",
+            [vim.diagnostic.severity.WARN]  = "󰔶",
+            [vim.diagnostic.severity.INFO]  = "󰌵",
+            [vim.diagnostic.severity.HINT]  = "",
+        }
+    }
 })
-
-vim.fn.sign_define('DiagnosticSignError', {icon='󰏃'})
-vim.fn.sign_define('DiagnosticSignWarn',  {icon='󰔶'})
-vim.fn.sign_define('DiagnosticSignInfo',  {icon='󰌵'})
-vim.fn.sign_define('DiagnosticSignHint',  {icon=''})
