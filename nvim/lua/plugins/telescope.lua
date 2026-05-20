@@ -92,7 +92,7 @@ vim.keymap.set('n', '\\f', function() builtin.lsp_document_symbols({symbols = {'
 vim.keymap.set('n', '\\v', function() builtin.lsp_document_symbols({symbols = {'variable', 'field', 'parameter', 'constant'}}) end, mopts)
 vim.keymap.set('n', '\\q', builtin.quickfix, mopts)
 vim.keymap.set('n', '\\l', builtin.loclist, mopts)
-vim.keymap.set('n', '<leader><Tab>', builtin.buffers, mopts)
+vim.keymap.set('n', '<leader><Tab>', function() builtin.buffers({ sort_lastused = true, sort_mru = true }) end, mopts)
 vim.keymap.set('n', '<leader>\\?', builtin.search_history, mopts)
 vim.keymap.set('n', '<leader>\\r', builtin.registers, mopts)
 vim.keymap.set('n', '<leader>\\:', builtin.command_history, mopts)
