@@ -1,31 +1,10 @@
-local rocks_config = {
-    rocks_path = vim.env.HOME .. "/.local/share/nvim/rocks",
-}
-
-vim.g.rocks_nvim = rocks_config
-
-local luarocks_path = {
-    vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?.lua"),
-    vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?", "init.lua"),
-}
-package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
-
-local luarocks_cpath = {
-    vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.so"),
-    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.so"), -- Remove the dylib and dll paths if you do not need macos or windows support
-    vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.dylib"),
-    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.dylib"),
-    vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.dll"),
-    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.dll"),
-}
-package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
-
-vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "*", "*"))
-
 vim.g.mapleader = ' '
-vim.cmd[[colorscheme tokyonight]]
+
+require('plugins')
+
+vim.cmd[[colorscheme tokyonight-night]]
 vim.opt.cmdheight = 0
--- vim.opt.laststatus = 3
+vim.opt.laststatus = 3
 vim.opt.showcmdloc = 'statusline'
 vim.opt.showcmd = true
 vim.opt.linebreak = true
@@ -57,7 +36,7 @@ vim.opt.list = true
 vim.opt.listchars = 'tab:-->,trail:,nbsp:█'
 vim.opt.mps:append({'<:>'})
 vim.opt.formatoptions:remove({'c', 'r', 'o'})
-vim.opt.signcolumn = 'auto:3'
+vim.opt.signcolumn = 'auto'
 
 vim.opt.guifont='FiraCode Nerd Font'
 vim.opt.numberwidth = 2
@@ -72,8 +51,8 @@ vim.api.nvim_create_autocmd({'ModeChanged'}, { callback = function(_) vim.schedu
 vim.api.nvim_create_autocmd('RecordingEnter', { callback = function() vim.g._macro_str = '@' .. vim.fn.reg_recording() end })
 vim.api.nvim_create_autocmd('RecordingLeave', { callback = function() vim.g._macro_str = '' end })
 vim.api.nvim_create_autocmd('FileType', { pattern = 'help', callback = function() vim.opt_local.statusline = '%t%#StatusLineDither#%{(v:hlsearch?_search_progress():" ")}%=%y' end })
-function vim.g._search_progress() if vim.fn.searchcount().current > 0 then return string.format(' [%d/%d] ', vim.fn.searchcount().current, vim.fn.searchcount().total) else return "" end end
-vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%*%t%#StatusLineDither#%{(v:hlsearch?_search_progress():" ")}%#StatusLineRecording#%{g:_macro_str}%#StatusLineShowCmd#%S%=%7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%* %Y'
+function vim.g._search_progress() if vim.fn.searchcount().current > 0 then return string.format(' [%d/%d] ', vim.fn.searchcount().current, vim.fn.searchcount().total) else return '' end end
+vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%*%f%#StatusLineDither#%{(v:hlsearch?_search_progress():" ")}%#StatusLineRecording#%{g:_macro_str}%#StatusLineShowCmd#%S%=%7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%* %Y'
 
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {
@@ -86,7 +65,7 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
 vim.api.nvim_create_autocmd({'DirChanged'}, {
     callback = function(_)
         if _TermChannel ~= nil then
-            vim.fn.chansend(_TermChannel, ' cd ' .. vim.fn.expand("%:p:h") .. '\n')
+            vim.fn.chansend(_TermChannel, ' cd ' .. vim.fn.expand('%:p:h') .. '\n')
         end
     end,
 })
@@ -106,25 +85,14 @@ vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', mopts)
 vim.keymap.set('n', '<leader>`' , function() vim.cmd('b #') end, mopts)
-
-vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-
-vim.keymap.set(
-    'n', '<C-\\>',
-    function()
-        if not pcall(function() vim.cmd(':b term://') end) then
-            vim.api.nvim_command('terminal')
-        end
-
-        vim.cmd('startinsert')
-    end,
-    mopts
-)
-vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', mopts)
-vim.keymap.set('t', '<C-\\>', '<C-\\><C-N>:b #<CR>', mopts)
-vim.keymap.set('t', '<M-f>', function()
-    vim.fn.chansend(vim.o.channel, ' cd ' .. vim.fn.expand("#:p:h") .. '\n')
+vim.keymap.set('n', '<leader>gg', function()
+    vim.o.signcolumn = vim.o.signcolumn == 'auto' and 'no' or 'auto'
 end, mopts)
 
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
+
+pcall(require, 'custom')

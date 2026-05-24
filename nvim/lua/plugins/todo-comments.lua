@@ -2,13 +2,13 @@ local todo = require('todo-comments')
 require('todo-comments').setup({
     sign_priority = 1001,
     keywords = {
-        TODO = {icon = ''},
-        FIX  = {icon = ''},
-        HACK = {icon = '󰈸'},
-        WARN = {icon = ''},
-        PERF = {icon = '󰅒'},
-        NOTE = {icon = '󰆈'},
-        TEST = {icon = '󱎫'},
+        TODO = { icon = '' },
+        FIX  = { icon = '' },
+        HACK = { icon = '󰈸' },
+        WARN = { icon = '' },
+        PERF = { icon = '󰅒' },
+        NOTE = { icon = '󰆈' },
+        TEST = { icon = '󱎫' },
     }
 })
 

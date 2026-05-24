@@ -18,10 +18,6 @@ require('gitsigns').setup({
         end, { buffer = bufnr, silent = true, noremap = true, expr=true})
 
         mopts = { buffer = bufnr, silent = true, noremap = true }
-        vim.keymap.set('n', '<leader>gg', gs.toggle_signs, mopts)
-        vim.keymap.set('n', '<leader>gb', function() gs.blame_line{full=true} end, mopts)
-        vim.keymap.set('n', '<leader>gd', gs.diffthis, mopts)
-        vim.keymap.set('n', '<leader>gD', function() gs.diffthis(vim.cmd("~")) end, mopts)
         vim.keymap.set('n', '<leader>gp', gs.preview_hunk_inline, mopts)
         vim.keymap.set('n', '<leader>gP', gs.preview_hunk, mopts)
         vim.keymap.set('n', '<leader>gr', gs.reset_hunk, mopts)

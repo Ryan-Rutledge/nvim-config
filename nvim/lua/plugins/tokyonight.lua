@@ -1,11 +1,12 @@
 require('tokyonight').setup({
     style = 'night',
+    dim_inactive = true,
     styles = {
         functions = { italic = false },
         keywords = { italic = false },
         sidebars = 'dark'
     },
-    sidebars = { 'qf', 'help', 'fugitive', 'netrw', 'Outline', 'Telescope',},
+    sidebars = { 'qf', 'help', 'fugitive', 'netrw', 'Outline'},
     on_colors = function(colors)
         colors.comment = '#eeeeee'
     end,

@@ -1,12 +1,6 @@
 require('nvim-treesitter-textobjects').setup({
-    highlight = {
-        enable = true
-    },
-    textobjects = {
-        swap = {
-            enable = true,
-        },
-    },
+    highlight = { enable = true },
+    textobjects = { swap = { enable = true } },
 })
 
 local select = require('nvim-treesitter-textobjects.select')

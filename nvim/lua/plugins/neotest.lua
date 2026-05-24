@@ -5,7 +5,8 @@ neotest.setup({
         require('neotest-python')({
             dap = { justMyCode = false },
         }),
-    },
+        require('rustaceanvim.neotest')
+    }
 })
 
 local mopts = { silent = true, noremap = true }
@@ -26,6 +27,8 @@ end, mopts)
 
 vim.keymap.set('n', '<leader>ta', neotest.run.attach, mopts)
 vim.keymap.set('n', '<leader>to', neotest.output.open, mopts)
-vim.keymap.set('n', '<leader>tO', neotest.output_panel.toggle, mopts)
-vim.keymap.set('n', '<leader>td', function() neotest.run.run({ strategy = 'dap' }) end)
 vim.keymap.set('n', '<leader>tw', function() neotest.watch.toggle(vim.fn.expand('%')) end, mopts)
+vim.keymap.set('n', '<leader>td', function()
+    neotest.run.run({ strategy = 'dap' })
+    vim.cmd('DapViewOpen')
+end)
