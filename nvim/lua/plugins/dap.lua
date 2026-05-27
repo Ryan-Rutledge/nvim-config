@@ -2,6 +2,24 @@ local dap = require('dap')
 
 require('dap-python').setup()
 
+dap.adapters.gdb = {
+    type = 'executable',
+    command = 'gdb',
+    args = { '--quiet', '--interpreter=dap' },
+}
+
+dap.configurations.c = {
+    {
+        name = 'Run Executable (GDB)',
+        type = 'gdb',
+        request = 'launch',
+        program = function()
+        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+    }
+}
+
 local mopts = { silent = true, noremap = true }
 vim.keymap.set('n', '<leader>D', function() vim.cmd('DapViewToggle') end, mopts)
 vim.keymap.set('n', '<F5>', function() dap.continue() vim.cmd('DapViewOpen') end, mopts)
@@ -28,3 +46,5 @@ vim.fn.sign_define('DapLogPoint',            { text = '', texthl = 'MiniIcons
 vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'MiniIconsRed', linehl = '', numhl = ''})
 vim.fn.sign_define('DapBreakpointRejected',  { text = '', texthl = 'MiniIconsRed', linehl = '', numhl = ''})
 vim.fn.sign_define('DapStopped',             { text = '󰅂', texthl = 'MiniIconsBlue', linehl = '', numhl = ''})
+
+

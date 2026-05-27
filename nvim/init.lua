@@ -44,15 +44,9 @@ vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
-vim.opt.showtabline = 1
+vim.o.showtabline = 2
 
-vim.g._macro_str = ''
 vim.api.nvim_create_autocmd({'ModeChanged'}, { callback = function(_) vim.schedule(function() vim.cmd('redraw') end) end })  -- fixes statusline flash on mode change
-vim.api.nvim_create_autocmd('RecordingEnter', { callback = function() vim.g._macro_str = '@' .. vim.fn.reg_recording() end })
-vim.api.nvim_create_autocmd('RecordingLeave', { callback = function() vim.g._macro_str = '' end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'help', callback = function() vim.opt_local.statusline = '%t%#StatusLineDither#%{(v:hlsearch?_search_progress():" ")}%=%y' end })
-function vim.g._search_progress() if vim.fn.searchcount().current > 0 then return string.format(' [%d/%d] ', vim.fn.searchcount().current, vim.fn.searchcount().total) else return '' end end
-vim.opt.statusline = '%#StatusLineFlags#%m%w%q%h%*%f%#StatusLineDither#%{(v:hlsearch?_search_progress():" ")}%#StatusLineRecording#%{g:_macro_str}%#StatusLineShowCmd#%S%=%7(%#StatusLinePosition#%l,%-3c%) %10(%#StatusLineCharCode#%b U+%04B%) %#StatusLineFileMeta#%{&fileencoding}%{(&bomb?"BOM":"")} %{&fileformat}%* %Y'
 
 local _TermChannel = nil
 vim.api.nvim_create_autocmd({'TermOpen'}, {
@@ -85,9 +79,7 @@ vim.keymap.set('n', '<leader>CD', ':cd ..<CR>', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', mopts)
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', mopts)
 vim.keymap.set('n', '<leader>`' , function() vim.cmd('b #') end, mopts)
-vim.keymap.set('n', '<leader>gg', function()
-    vim.o.signcolumn = vim.o.signcolumn == 'auto' and 'no' or 'auto'
-end, mopts)
+vim.keymap.set('n', '<leader>gg', function() vim.o.signcolumn = vim.o.signcolumn == 'auto' and 'no' or 'auto' end, mopts)
 
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
@@ -96,3 +88,13 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 pcall(require, 'custom')
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascript', 'typescript', 'html', 'css', 'json', 'c', 'cpp' },
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+

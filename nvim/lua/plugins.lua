@@ -17,15 +17,18 @@ vim.pack.add({
 })
 vim.pack.add({gh('folke/snacks.nvim')})
 vim.pack.add({gh('folke/todo-comments.nvim')})
+vim.pack.add({gh('folke/todo-comments.nvim')})
 vim.pack.add({
-    gh('hrsh7th/cmp-nvim-lsp'),
-    gh('hrsh7th/nvim-cmp'),
+    gh('rafamadriz/friendly-snippets'),
+    { src = gh('saghen/blink.cmp'), version = vim.version.range('1.*') }
 })
 vim.pack.add({
     gh('mason-org/mason.nvim'),
     gh('mason-org/mason-lspconfig.nvim'),
     gh('stevearc/conform.nvim'),
 })
+
+-- vim.pack.add({gh('vim-test/vim-test')})
 vim.pack.add({
     gh('antoinemadec/FixCursorHold.nvim'),
     gh('nvim-treesitter/nvim-treesitter'),
@@ -44,11 +47,14 @@ require('plugins.flash')
 require('plugins.snacks')
 require('plugins.todo-comments')
 require('plugins.lsp')
+require('plugins.cmp')
 require('plugins.undotree')
 require('plugins.fugitive')
 require('plugins.nerdcommenter')
 require('plugins.gitsigns')
 require('plugins.nvim-treesitter-context')
 require('plugins.nvim-treesitter-textobjects')
+-- require('vim-test')
 require('plugins.neotest')
 require('plugins.dap')
+require('plugins.statusline')

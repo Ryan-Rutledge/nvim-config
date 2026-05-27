@@ -10,15 +10,27 @@ snacks.setup({
     input = { enabled = true, position = 'float' },
     scroll = { enabled = false },
     picker = {
+        jump = { reuse_win = true },
         enabled = true,
-        layout = { preset = 'ivy', layout = { border = false } },
+        layout = { preset = 'default' },
         sources = {
+            git_log = { focus = 'list' },
+            git_log_file = { focus = 'list' },
+            git_diff = { focus = 'list' },
+            lsp_symbols = { layout = { preset = 'vscode', hidden = {}, preview = 'main' }, tree = true },
+            -- marks = { layout = { preset = 'vscode', preview = 'main' } },
             explorer = {
-                layout = { layout = { border = false, preview = true } }, 
-                auto_close = true, 
+                layout = { preset = 'vscode' },
+                auto_close = true,
+                win = {
+                    list = {
+                        keys = {
+                            ['<C-t>'] = { 'tab', mode = { 'n', 'i' } },
+                            ['<M-t>'] = { { 'terminal', 'close' }, mode = { 'n', 'i' } },
+                        },
+                    },
+                },
             },
-            git_log = { focus = 'list', layout = { fullscreen = true } },
-            git_log_file = { focus = 'list', layout = { fullscreen = true } },
             ['git_files_changed'] = {
                 title = 'Changed Files',
                 finder = 'proc',
@@ -34,7 +46,7 @@ snacks.setup({
                 title = 'Untracked Files',
                 finder = 'proc',
                 cmd = 'git',
-                args = { 'ls-files', '--others' },
+                args = { 'ls-files', '--others', '--exclude-standard' },
                 format = 'file',
                 preview = 'file',
                 transform = function(item)
@@ -53,7 +65,6 @@ snacks.setup({
     },
     notifier = { enabled = true },
     quickfile = { enabled = true },
-    scope = { enabled = true },
     statuscolumn = { enabled = true },
     terminal = {
         enabled = true,
@@ -83,8 +94,8 @@ vim.keymap.set('n', '<leader><Tab>', function() Snacks.picker.buffers({
     current = false,
     sort_lastused = true,
 }) end, mopts)
-vim.keymap.set('n', '<leader>\\', function() Snacks.picker.pickers() end, mopts)
-vim.keymap.set('n', '<leader>F', function() Snacks.explorer.reveal() end, mopts)
+vim.keymap.set('n', '|', function() Snacks.picker.pickers() end, mopts)
+vim.keymap.set('n', '<leader>F', function() Snacks.explorer({ cwd = vim.fn.expand('%:p:h') }) end, mopts)
 vim.keymap.set('n', '<leader>f', function() Snacks.picker.files() end, mopts)
 
 vim.keymap.set('n', '\\g', function() Snacks.picker.git_log_file() end, mopts)
@@ -99,10 +110,10 @@ vim.keymap.set('n', '\\<Tab>', function() Snacks.picker.pick({
         sort_empty = true,
     },
 }) end, mopts)
-vim.keymap.set('n', '\\<S-Tab>', function() Snacks.picker.git_diff({ source = 'git_diff_changed' }) end, mopts)
-
+vim.keymap.set('n', '\\`', function() Snacks.picker.git_diff({ source = 'git_diff_changed' }) end, mopts)
+vim.keymap.set('n', '\\%', function() Snacks.picker.grep({ search = function() return vim.fn.expand('%') end }) end, mopts)
 vim.keymap.set('n', '\\b', function() Snacks.picker.grep_buffers() end, mopts)
-vim.keymap.set('n', '\\/', function() Snacks.picker.grep({ dirs = { '.' } }) end, mopts)
+vim.keymap.set('n', '\\/', function() Snacks.picker.grep({ cwd = vim.fn.expand('%:p:h') }) end, mopts)
 vim.keymap.set('n', '\\*', function()
     if Snacks.git.get_root() then
         Snacks.picker.git_grep({
@@ -123,13 +134,14 @@ end, mopts)
 vim.keymap.set('n', '\\m', function() Snacks.picker.marks() end, mopts)
 vim.keymap.set('n', '\\q', function() Snacks.picker.qflist() end, mopts)
 vim.keymap.set('n', '\\l', function() Snacks.picker.loclist() end, mopts)
-vim.keymap.set('n', '\\c', function() Snacks.picker.lsp_symbols({ filter = { default = { 'Class', 'Interface', 'Struct', 'Trait' } } }) end, mopts)
-vim.keymap.set('n', '\\f', function() Snacks.picker.lsp_symbols({ filter = { default = { 'Constructor', 'Function', 'Method' } } }) end, mopts)
-vim.keymap.set('n', '\\v', function() Snacks.picker.lsp_symbols({ filter = { default = { 'Enum', 'Field', 'Property', 'Variable', 'Constant' } } }) end, mopts)
+vim.keymap.set('n', '\\a', function() Snacks.picker.lsp_symbols({ search = 'Outline', filter = { default = { 'Array', 'Boolean', 'Class', 'Color', 'Control', 'Collapsed', 'Constant', 'Constructor', 'Copilot', 'Enum', 'EnumMember', 'Event', 'Field', 'File', 'Folder', 'Function', 'Interface', 'Key', 'Keyword', 'Method', 'Module', 'Namespace', 'Null', 'Number', 'Object', 'Operator', 'Package', 'Property', 'Reference', 'Snippet', 'String', 'Struct', 'Text', 'TypeParameter', 'Unit', 'Unknown', 'Value', 'Variable' } }, keep_parents = true }) end, mopts)
+vim.keymap.set('n', '\\c', function() Snacks.picker.lsp_symbols({ search = 'Classes', filter = { default = { 'Class', 'Interface', 'Module', 'Namespace', 'Struct', 'Trait' } } }) end, mopts)
+vim.keymap.set('n', '\\f', function() Snacks.picker.lsp_symbols({ search = 'Functions', filter = { default = { 'Constructor', 'Function', 'Method' } } }) end, mopts)
+vim.keymap.set('n', '\\v', function() Snacks.picker.lsp_symbols({ search = 'Variables', filter = { default = { 'Array', 'Boolean', 'Color', 'Constant', 'Enum', 'EnumMember', 'Field', 'Key', 'Null', 'Number', 'Object', 'Property', 'Reference', 'String', 'Text', 'TypeParameter', 'Value', 'Variable' } } }) end, mopts)
 
 vim.keymap.set('n', '=z', function() Snacks.picker.spelling() end, mopts)
 vim.keymap.set('n', '<leader>gb', function() Snacks.gitbrowse() end, mopts)
-vim.keymap.set('n', '<leader><Enter>', function() Snacks.scratch() end, mopts)
+vim.keymap.set('n', '<leader><Enter>', function() Snacks.scratch({ ft = 'markdown' }) end, mopts)
 vim.keymap.set({ 'n', 't' }, '<C-\\>', function() Snacks.terminal.focus() end, mopts)
 vim.keymap.set('t', '<M-f>', function()
     vim.fn.chansend(vim.o.channel, ' cd ' .. vim.fn.expand('#:p:h') .. '\n')
